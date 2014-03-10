@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="cn/sharesdk/ane/PlatformID" mod="1393997892093" signatureChecksum="1473680497" >
+        <def id="cn.sharesdk.ane:PlatformID" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_85ae08e32a2df068bcbd651dc10241c82a04852d42c86ab9a3605c83b41e0fb4_flash_display_Sprite" mod="1394176829907" signatureChecksum="1784183377" >
+        <def id="_85ae08e32a2df068bcbd651dc10241c82a04852d42c86ab9a3605c83b41e0fb4_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="cn/sharesdk/ane/PlatformAction" mod="1394073908484" signatureChecksum="727953692" >
+        <def id="cn.sharesdk.ane:PlatformAction" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="cn/sharesdk/ane/ShareSDKExtension" mod="1394094297390" signatureChecksum="4231793432" >
+        <def id="cn.sharesdk.ane:ShareSDKExtension" /> 
+        <dep id="JSON" type="e" /> 
+        <dep id="cn.sharesdk.ane:PlatformAction" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="0c219a14f75c72b5aea05be610fd662fecbc320f2a73c53800e88c960a784d6f"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

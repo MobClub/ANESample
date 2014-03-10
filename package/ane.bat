@@ -1,0 +1,1 @@
+java -jar adt.jar -package -target ane ShareSDK.ane .\extension.xml -swc .\ShareSDKExtension.swc -platform Android-ARM -C .\Android-ARM .
