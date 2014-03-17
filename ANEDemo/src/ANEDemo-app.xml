@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/3.1">
+<application xmlns="http://ns.adobe.com/air/application/4.0">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
 	Specifies parameters for identifying, installing, and launching AIR applications.
 
-	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/3.1
+	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/3.5
 			The last segment of the namespace specifies the version 
 			of the AIR runtime required for this application to run.
 			
@@ -87,7 +87,7 @@
 		<!-- The window's initial maximum size, specified as a width/height pair in pixels, such as "1600 1200". Optional. -->
 		<!-- <maxSize></maxSize> -->
 
-        <!-- The initial aspect ratio of the app when launched (either "portrait" or "landscape"). Optional. Mobile only. Default is the natural orientation of the device -->
+        <!-- The aspect ratio of the app ("portrait" or "landscape" or "any"). Optional. Mobile only. Default is the natural orientation of the device -->
 
         <!-- <aspectRatio></aspectRatio> -->
 
@@ -103,12 +103,17 @@
 
         <!-- <renderMode></renderMode> -->
 
+        <!-- Whether the default direct mode rendering context allocates storage for depth and stencil buffers.  Optional.  Default false. -->
+        <!-- <depthAndStencil></depthAndStencil> -->
+
 		<!-- Whether or not to pan when a soft keyboard is raised or lowered (either "pan" or "none").  Optional.  Defaults "pan." -->
 		<!-- <softKeyboardBehavior></softKeyboardBehavior> -->
+
+		<!-- Display Resolution for the app (either "standard" or "high"). Optional, OSX-only. Default "standard" -->
+		<!-- <requestedDisplayResolution></requestedDisplayResolution> -->
 	<autoOrients>true</autoOrients>
-        <fullScreen>false</fullScreen>
+        <fullScreen>true</fullScreen>
         <visible>true</visible>
-        <softKeyboardBehavior>none</softKeyboardBehavior>
     </initialWindow>
 
 	<!-- We recommend omitting the supportedProfiles element, -->
@@ -117,6 +122,10 @@
 	<!-- (i.e., to only mobile devices) then add this element and list -->
 	<!-- only the profiles which your application does support. -->
 	<!-- <supportedProfiles>desktop extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles> -->
+
+	<!-- Languages supported by application -->
+	<!-- Only these languages can be specified -->
+	<!-- <supportedLanguages>en de cs es fr it ja ko nl pl pt ru sv tr zh</supportedLanguages> -->
 
 	<!-- The subpath of the standard default installation location to use. Optional. -->
 	<!-- <installFolder></installFolder> -->
@@ -128,13 +137,27 @@
 	specify the path to a PNG file included in the AIR package. Optional. -->
 	<!-- <icon>
 		<image16x16></image16x16>
+		<image29x29></image29x29>
 		<image32x32></image32x32>
 		<image36x36></image36x36>
+		<image40x40></image40x40>
 		<image48x48></image48x48>
+		<image50x50></image50x50>
 		<image57x57></image57x57>
+		<image58x58></image58x58>
 		<image72x72></image72x72>
+		<image76x76></image76x76>
+		<image80x80></image80x80>
+		<image96x96></image96x96>
+		<image100x100></image100x100>
 		<image114x114></image114x114>
+		<image120x120></image120x120>
 		<image128x128></image128x128>
+		<image144x144></image144x144>
+		<image152x152></image152x152>
+		<image512x512></image512x512>
+		<image732x412></image732x412>
+		<image1024x1024></image1024x1024>
 	</icon> -->
 
 	<!-- Whether the application handles the update when a user double-clicks an update version
@@ -203,6 +226,12 @@
         </Entitlements> -->
 	<!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
 	<!-- <requestedDisplayResolution></requestedDisplayResolution> -->
+	<!-- Forcing Render Mode CPU for the devices mentioned. Optional  -->
+	<!-- <forceCPURenderModeForDevices></forceCPURenderModeForDevices> -->
+	<!-- File containing line separated list of external swf paths. These swfs won't be 
+	packaged inside the application and corresponding stripped swfs will be output in 
+	externalStrippedSwfs folder. -->
+	<!-- <externalSwfs></externalSwfs> -->
 	<!-- </iPhone> -->
 
 	<!-- Specify Android specific tags that get passed to AndroidManifest.xml file. -->
@@ -227,43 +256,30 @@
         </manifestAdditions> -->
 	    <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
         <!-- <colorDepth></colorDepth> -->
+        <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
+        <!-- <containsVideo></containsVideo> -->
     <!-- </android> -->
 	<!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
 
 <android>
-        <colorDepth>16bit</colorDepth>
         <manifestAdditions><![CDATA[
 			<manifest android:installLocation="auto">
-			    <uses-permission android:name="android.permission.GET_TASKS" />
-			    <uses-permission android:name="android.permission.INTERNET" />
-			    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-			    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-			    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-			    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-			    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-			    
-			    <application android:enabled="true">
-			    	<activity
-			    		android:windowSoftInputMode="stateHidden|adjustResize"
-			    		android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			            android:name="cn.sharesdk.framework.ShareSDKUIShell" />
-			            
-			        <!-- 微信分享回调 -->
-			        <activity
-			            android:name=".wxapi.WXEntryActivity"
-			            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			            android:exported="true" />
-			            
-			        <!-- 易信分享回调 -->
-			        <activity
-			            android:name=".yxapi.YXEntryActivity"
-			            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			            android:excludeFromRecents="true"
-			            android:exported="true"
-			            android:launchMode="singleTop" />
-			    </application>
+			    <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->
+			    <!--删除 android.permission.INTERNET 权限将导致无法调试设备上的应用程序-->
+			    <uses-permission android:name="android.permission.INTERNET"/>
+			    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+			    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
+			    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
+			    <!--应同时切换 DISABLE_KEYGUARD 和 WAKE_LOCK 权限，才能访问 AIR
+					的 SystemIdleMode API-->
+			    <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
+			    <!--<uses-permission android:name="android.permission.WAKE_LOCK"/>-->
+			    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
+			    <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
+			    <!--应同时切换 ACCESS_NETWORK_STATE 和 ACCESS_WIFI_STATE 权限，才能使用 AIR
+					的 NetworkInfo API-->
+			    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
+			    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
 			</manifest>
 			
 		]]></manifestAdditions>
@@ -278,7 +294,7 @@
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
-<extensions>
-        <extensionID>ShareSDKExtension</extensionID>
+    <extensions>
+        <extensionID>cn.sharesdk.ane.ShareSDKExtension</extensionID>
     </extensions>
 </application>

@@ -1,13 +1,27 @@
-<extension xmlns="http://ns.adobe.com/air/extension/2.5">
-<id>ShareSDKExtension</id>
-<versionNumber>1</versionNumber>
-<platforms>
-<platform name="Android-ARM">
-<applicationDeployment>
-<nativeLibrary>ShareSDKANE.jar</nativeLibrary>
-<initializer>cn.sharesdk.ane.ShareSDKUtils</initializer>
-<finalizer>cn.sharesdk.ane.ShareSDKUtils</finalizer>
-</applicationDeployment>
-</platform>
-</platforms>
+<extension xmlns="http://ns.adobe.com/air/extension/3.5">
+	<id>cn.sharesdk.ane.ShareSDKExtension</id>
+	<versionNumber>1</versionNumber>
+	<platforms>
+		<platform name="Android-ARM">
+		<applicationDeployment>
+			<nativeLibrary>ShareSDKANE.jar</nativeLibrary>
+			<initializer>cn.sharesdk.ane.ShareSDKUtils</initializer>
+			<finalizer>cn.sharesdk.ane.ShareSDKUtils</finalizer>
+		</applicationDeployment>
+		</platform>
+		<platform name="iPhone-ARM">
+	      <applicationDeployment>
+	        <nativeLibrary>libShareSDKForANE.a</nativeLibrary>
+	        <initializer>ShareSDKInitializer</initializer>
+	        <finalizer>ShareSDKFinalizer</finalizer>
+	      </applicationDeployment>
+	    </platform>
+	    <platform name="iPhone-x86">
+	      <applicationDeployment>
+	        <nativeLibrary>libShareSDKForANE.a</nativeLibrary>
+	        <initializer>ShareSDKInitializer</initializer>
+	        <finalizer>ShareSDKFinalizer</finalizer>
+	      </applicationDeployment>
+	    </platform>
+	</platforms>
 </extension>

@@ -1,0 +1,1 @@
+/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/bin/adt -package -target ane ShareSDK.ane extension.xml -swc ShareSDKExtension.swc -platform iPhone-ARM -C ./iPhone-ARM . -platformoptions platformoptions.xml -platform iPhone-x86 -C ./iPhone-x86 . -platformoptions platformoptions.xml -platform Android-ARM -C ./Android-ARM .
