@@ -309,9 +309,8 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 				oks.setSiteUrl(String.valueOf(map.get("siteUrl")));
 			}
 			oks.setCallback(this);
-			@SuppressWarnings("unchecked")
-			ArrayList<Integer> platforms = (ArrayList<Integer>) params.get("platforms");
-			String platformName = ShareSDK.platformIdToName(platforms.get(0).intValue());
+			int platform = (Integer) params.get("platform");
+			String platformName = ShareSDK.platformIdToName(platform);
 			oks.setPlatform(platformName);
 			oks.show(getActivity());
 		}
