@@ -15,13 +15,6 @@
         <option>-lstdc++</option>
         <option>-lsqlite3</option>
         <option>-framework Security</option>
-        <option>-framework CoreMotion</option>
-        <option>-framework CoreLocation</option>
-        <option>-framework MediaPlayer</option>
-        <option>-framework CoreText</option>
-        <option>-framework AssetsLibrary</option>
-        <option>-framework MessageUI</option>
-        <option>-framework AddressBook</option>
     </linkerOptions> 
     <packagedDependencies>
         <packagedDependency>ShareSDK/Core/AGCommon.framework</packagedDependency>

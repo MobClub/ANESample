@@ -1,4 +1,5 @@
 package cn.sharesdk.ane {
+	import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	import flash.events.InvokeEvent;
@@ -19,6 +20,20 @@ package cn.sharesdk.ane {
 		public function ShareSDKExtension() {
 			context = ExtensionContext.createExtensionContext("cn.sharesdk.ane.ShareSDKExtension","");
 			context.addEventListener(StatusEvent.STATUS, javaCallback);
+			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, invokeHandler);
+		}
+		
+		private function invokeHandler(event:InvokeEvent):void
+		{
+			if (event.arguments.length > 0)
+			{
+				var params:Object = new Object();
+				params["url"] = event.arguments[0] as String;
+				params["source_app"] = event.arguments[1] as String;
+				params["annotation"] = event.arguments[2] as String;
+				
+				callJavaFunction("handleOpenURL", params);
+			}	
 		}
 		
 		private function callJavaFunction(action:String, params:Object = null):String {
@@ -26,12 +41,14 @@ package cn.sharesdk.ane {
 			data.action = action;
 			data.params = params;
 			var json:String = JSON.stringify(data);
+			trace("params = ", json);
 			return context.call("ShareSDKUtils", json) as String;
 		}
 		
 		private function javaCallback(e:StatusEvent):void {
 			if (e.code == "SSDK_PA") {
 				var json:String = e.level;
+				trace (json);
 				if (json == null) {
 					return;
 				}

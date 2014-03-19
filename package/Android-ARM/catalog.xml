@@ -10,46 +10,43 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="cn/sharesdk/ane/events/AuthEvent" mod="1395041109765" signatureChecksum="3369496170" >
+      <script name="cn/sharesdk/ane/events/AuthEvent" mod="1395022440000" signatureChecksum="3369496170" >
         <def id="cn.sharesdk.ane.events:AuthEvent" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="_20e75027fc73f979493bffefcc86934f42f4484ff2e5a90a9fe5cad04f2efaf5_flash_display_Sprite" mod="1395043759062" signatureChecksum="2658630747" >
-        <def id="_20e75027fc73f979493bffefcc86934f42f4484ff2e5a90a9fe5cad04f2efaf5_flash_display_Sprite" /> 
-        <dep id="flash.system:Security" type="e" /> 
-        <dep id="AS3" type="n" /> 
-        <dep id="flash.display:Sprite" type="i" /> 
-      </script>
-      <script name="cn/sharesdk/ane/events/ShareEvent" mod="1395041109796" signatureChecksum="3065679656" >
+      <script name="cn/sharesdk/ane/events/ShareEvent" mod="1395023580000" signatureChecksum="3065679656" >
         <def id="cn.sharesdk.ane.events:ShareEvent" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/PlatformID" mod="1393997892093" signatureChecksum="1473680497" >
+      <script name="cn/sharesdk/ane/PlatformID" mod="1394706465000" signatureChecksum="1473680497" >
         <def id="cn.sharesdk.ane:PlatformID" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/ShareMenuArrowDirection" mod="1395041109765" signatureChecksum="1657557910" >
+      <script name="cn/sharesdk/ane/ShareMenuArrowDirection" mod="1394762561000" signatureChecksum="1657557910" >
         <def id="cn.sharesdk.ane:ShareMenuArrowDirection" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/NativeMethodName" mod="1395041109687" signatureChecksum="1738971874" >
+      <script name="cn/sharesdk/ane/NativeMethodName" mod="1394777347000" signatureChecksum="1738971874" >
         <def id="cn.sharesdk.ane:NativeMethodName" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/ShareSDKExtension" mod="1395043758796" signatureChecksum="3384915853" >
+      <script name="cn/sharesdk/ane/ShareSDKExtension" mod="1395201397000" signatureChecksum="3083519029" >
         <def id="cn.sharesdk.ane:ShareSDKExtension" /> 
         <dep id="JSON" type="e" /> 
+        <dep id="trace" type="e" /> 
         <dep id="cn.sharesdk.ane:Action" type="e" /> 
         <dep id="cn.sharesdk.ane:NativeMethodName" type="e" /> 
         <dep id="flash.events:StatusEvent" type="e" /> 
         <dep id="flash.external:ExtensionContext" type="e" /> 
         <dep id="cn.sharesdk.ane:ResponseState" type="e" /> 
         <dep id="cn.sharesdk.ane.events:ShareEvent" type="e" /> 
+        <dep id="flash.events:InvokeEvent" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
         <dep id="cn.sharesdk.ane.events:AuthEvent" type="e" /> 
         <dep id="cn.sharesdk.ane.events:UserInfoEvent" type="e" /> 
         <dep id="flash.events:Event" type="s" /> 
@@ -63,23 +60,29 @@
         <dep id="flash.events:IEventDispatcher" type="i" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/Action" mod="1395041109687" signatureChecksum="2492215432" >
+      <script name="cn/sharesdk/ane/Action" mod="1395022340000" signatureChecksum="2492215432" >
         <def id="cn.sharesdk.ane:Action" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/ResponseState" mod="1395041109703" signatureChecksum="1949579838" >
+      <script name="cn/sharesdk/ane/ResponseState" mod="1394762286000" signatureChecksum="1949579838" >
         <def id="cn.sharesdk.ane:ResponseState" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="cn/sharesdk/ane/events/UserInfoEvent" mod="1395041109796" signatureChecksum="2706145684" >
+      <script name="_d2b2b83c671397be21cf775953029b2615dd86fbcf5c2780921da595b53915ab_flash_display_Sprite" mod="1395201406362" signatureChecksum="3527113093" >
+        <def id="_d2b2b83c671397be21cf775953029b2615dd86fbcf5c2780921da595b53915ab_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="cn/sharesdk/ane/events/UserInfoEvent" mod="1395022870000" signatureChecksum="2706145684" >
         <def id="cn.sharesdk.ane.events:UserInfoEvent" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="0fef95eeb8b791f1e986a6c5f571e652ea7b4a5ff99436948e763df679c789a3"   />
+        <digest type="SHA-256" signed="false" value="c0909441fa5e82e035f6281ccbb2663128aca17015d645b4acbe64ba67245e41"   />
       </digests>
     </library>
   </libraries>
