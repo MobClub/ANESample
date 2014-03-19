@@ -264,24 +264,37 @@
 <android>
         <manifestAdditions><![CDATA[
 			<manifest android:installLocation="auto">
-			    <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->
-			    <!--删除 android.permission.INTERNET 权限将导致无法调试设备上的应用程序-->
-			    <uses-permission android:name="android.permission.INTERNET"/>
-			    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-			    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-			    <!--应同时切换 DISABLE_KEYGUARD 和 WAKE_LOCK 权限，才能访问 AIR
-					的 SystemIdleMode API-->
-			    <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
-			    <!--<uses-permission android:name="android.permission.WAKE_LOCK"/>-->
-			    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-			    <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
-			    <!--应同时切换 ACCESS_NETWORK_STATE 和 ACCESS_WIFI_STATE 权限，才能使用 AIR
-					的 NetworkInfo API-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
-			    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+			    <uses-permission android:name="android.permission.GET_TASKS" />
+			    <uses-permission android:name="android.permission.INTERNET" />
+			    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+			    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+			    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+			    
+			    <application android:enabled="true">
+			    	<activity
+			    		android:windowSoftInputMode="stateHidden|adjustResize"
+			    		android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			            android:name="cn.sharesdk.framework.ShareSDKUIShell" />
+			            
+			        <!-- 微信分享回调 -->
+			        <activity
+			            android:name=".wxapi.WXEntryActivity"
+			            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			            android:exported="true" />
+			            
+			        <!-- 易信分享回调 -->
+			        <activity
+			            android:name=".yxapi.YXEntryActivity"
+			            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			            android:excludeFromRecents="true"
+			            android:exported="true"
+			            android:launchMode="singleTop" />
+			    </application>
 			</manifest>
-			
 		]]></manifestAdditions>
     </android>
     <iPhone>

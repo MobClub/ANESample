@@ -22,17 +22,14 @@ package cn.sharesdk.ane {
 		}
 		
 		private function callJavaFunction(action:String, params:Object = null):String {
-			
 			var data:Object = new Object();
 			data.action = action;
 			data.params = params;
 			var json:String = JSON.stringify(data);
 			return context.call("ShareSDKUtils", json) as String;
-			
 		}
 		
 		private function javaCallback(e:StatusEvent):void {
-			
 			if (e.code == "SSDK_PA") {
 				var json:String = e.level;
 				if (json == null) {
