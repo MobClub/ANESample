@@ -304,10 +304,49 @@
 				<string>1</string>
 				<string>2</string>
 			</array>
+			<key>CFBundleURLTypes</key>
+			<array>
+				<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLName</key>
+					<string>cn.appgo.sharebyone</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>cn.appgo.sharebyone</string>
+					</array>
+				</dict>
+				<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLName</key>
+					<string></string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>fb107704292745179</string>
+						<string>wb568898243</string>
+						<string>wx4868b35061f87885</string>
+						<string>QQ05FB8B52</string>
+						<string>QQ075BCD15</string>
+						<string>pocketapp1234</string>
+						<string>tencent100371282</string>
+						<string>wb801307650</string>
+						<string>rm226427cn.appgo.sharebyone</string>
+						<string>pin1432928</string>
+						<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
+					</array>
+				</dict>
+			</array>
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
     <extensions>
         <extensionID>cn.sharesdk.ane.ShareSDKExtension</extensionID>
+    
+        
+        
+        
+        
+    
     </extensions>
 </application>

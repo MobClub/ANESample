@@ -46,6 +46,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4104859718D9662C006FCAF8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4104866D18D97326006FCAF8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4104866F18D9732E006FCAF8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		4104867118D97338006FCAF8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		4104867318D97346006FCAF8 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		4104867518D9734C006FCAF8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		4104867718D9736B006FCAF8 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		4104867918D97371006FCAF8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4104867B18D97377006FCAF8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		417D342B18D1C81B0043C52D /* libShareSDKForANE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShareSDKForANE.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		417D342E18D1C81B0043C52D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		417D343218D1C81B0043C52D /* ShareSDKForANE-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareSDKForANE-Prefix.pch"; sourceTree = "<group>"; };
@@ -123,9 +132,18 @@
 		417D342D18D1C81B0043C52D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4104867B18D97377006FCAF8 /* CoreTelephony.framework */,
+				4104867918D97371006FCAF8 /* MessageUI.framework */,
+				4104867718D9736B006FCAF8 /* libstdc++.dylib */,
+				4104867518D9734C006FCAF8 /* libsqlite3.dylib */,
+				4104867318D97346006FCAF8 /* libz.1.2.5.dylib */,
+				4104867118D97338006FCAF8 /* libz.dylib */,
+				4104866F18D9732E006FCAF8 /* libicucore.dylib */,
+				4104866D18D97326006FCAF8 /* SystemConfiguration.framework */,
 				417D342E18D1C81B0043C52D /* Foundation.framework */,
 				417D343C18D1C81B0043C52D /* XCTest.framework */,
 				417D343F18D1C81B0043C52D /* UIKit.framework */,
+				4104859718D9662C006FCAF8 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,6 +273,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "掌淘科技";
+				TargetAttributes = {
+					417D343A18D1C81B0043C52D = {
+						TestTargetID = 4104859418D9662C006FCAF8;
+					};
+				};
 			};
 			buildConfigurationList = 417D342618D1C81B0043C52D /* Build configuration list for PBXProject "ShareSDKForANE" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -262,6 +285,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
+				"zh-Hans",
 			);
 			mainGroup = 417D342218D1C81B0043C52D;
 			productRefGroup = 417D342C18D1C81B0043C52D /* Products */;
@@ -459,6 +484,7 @@
 		417D345218D1C81B0043C52D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TestShareSDKForANE.app/TestShareSDKForANE";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -472,6 +498,7 @@
 				);
 				INFOPLIST_FILE = "ShareSDKForANETests/ShareSDKForANETests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -479,6 +506,7 @@
 		417D345318D1C81B0043C52D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TestShareSDKForANE.app/TestShareSDKForANE";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -488,6 +516,7 @@
 				GCC_PREFIX_HEADER = "ShareSDKForANE/ShareSDKForANE-Prefix.pch";
 				INFOPLIST_FILE = "ShareSDKForANETests/ShareSDKForANETests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

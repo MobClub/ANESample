@@ -38,6 +38,16 @@
                ReferencedContainer = "container:ShareSDKForANE.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "410485B418D9662C006FCAF8"
+               BuildableName = "TestShareSDKForANETests.xctest"
+               BlueprintName = "TestShareSDKForANETests"
+               ReferencedContainer = "container:ShareSDKForANE.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

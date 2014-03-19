@@ -428,16 +428,35 @@ void ShareSDKGetUserInfo (FREContext ctx, NSDictionary *params)
 
 void ShareSDKShare (FREContext ctx, NSDictionary *params)
 {
-    ShareType platType = ShareTypeAny;
-    id<ISSContent> publicContent = nil;
-    if ([[params objectForKey:@"platform"] isKindOfClass:[NSNumber class]])
-    {
-        platType = (ShareType)[[params objectForKey:@"platform"] integerValue];
-    }
-    if ([[params objectForKey:@"shareParams"] isKindOfClass:[NSDictionary class]])
-    {
-        publicContent = convertPublicContent([params objectForKey:@"shareParams"]);
-    }
+//    ShareType platType = ShareTypeAny;
+//    id<ISSContent> publicContent = nil;
+//    if ([[params objectForKey:@"platform"] isKindOfClass:[NSNumber class]])
+//    {
+//        platType = (ShareType)[[params objectForKey:@"platform"] integerValue];
+//    }
+//    if ([[params objectForKey:@"shareParams"] isKindOfClass:[NSDictionary class]])
+//    {
+//        publicContent = convertPublicContent([params objectForKey:@"shareParams"]);
+//    }
+    
+    ShareType platType = ShareTypeQQSpace;
+    id<ISSContent> publicContent = [ShareSDK content:@"好耶～好高兴啊～"
+                                      defaultContent:nil
+                                               image:[ShareSDK imageWithUrl:@"http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg"]
+                                               title:@"ShareSDK for ANE发布"
+                                                 url:@"http://sharesdk.cn"
+                                         description:@""
+                                           mediaType:SSPublishContentMediaTypeText];
+    [publicContent addQQSpaceUnitWithTitle:INHERIT_VALUE
+                                       url:INHERIT_VALUE
+                                      site:@"ShareSDK"
+                                   fromUrl:@"http://sharesdk.cn"
+                                   comment:INHERIT_VALUE
+                                   summary:INHERIT_VALUE
+                                     image:INHERIT_VALUE
+                                      type:INHERIT_VALUE
+                                   playUrl:INHERIT_VALUE
+                                      nswb:INHERIT_VALUE];
     
     [ShareSDK shareContent:publicContent
                       type:platType

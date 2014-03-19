@@ -148,12 +148,11 @@ package
 		{
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
-//			shareParams.titleUrl = "http://sharesdk.cn";
+			shareParams.titleUrl = "http://sharesdk.cn";
 			shareParams.text = "好耶～好高兴啊～";
-			shareParams.shareType = ShareType.SHARE_TEXT;
-//			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
-//			shareParams.site = "ShareSDK";
-//			shareParams.siteUrl = "http://sharesdk.cn";
+			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
+			shareParams.site = "ShareSDK";
+			shareParams.siteUrl = "http://sharesdk.cn";
 			shareSDK.shareContent(PlatformID.WeChatSession, shareParams);
 		}
 		

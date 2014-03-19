@@ -34,7 +34,7 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="5" linkType="2" path="D:/workspace/github/ANESample/package/ShareSDK.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/vim888/Documents/工作/ShareSDK_Other/Demo/ANESample_git/package/ShareSDK.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -48,7 +48,7 @@
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
-    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="/Users/vim888/Desktop/6E598C8D-B422-4C0A-A64C-ADC74E775AC2.mobileprovision" releasePackageType="">
+    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="/Users/vim888/Desktop/6E598C8D-B422-4C0A-A64C-ADC74E775AC2.mobileprovision" releasePackageType="ipa-app-store">
       <airSettings airCertificatePath="/Users/vim888/Desktop/iPhoneDeveloper.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
