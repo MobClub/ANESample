@@ -34,13 +34,11 @@
         <packagedDependency>ShareSDK/Connection/EverNoteConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/FacebookConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/FlickrConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/GooglePlusConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/InstagramConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/InstapaperConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/KaiXinConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/LinkedInConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/MailConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/PinterestConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/PocketConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/PrintConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/QQConnection.framework</packagedDependency>
@@ -59,9 +57,6 @@
         <packagedDependency>ShareSDK/Connection/YouDaoNoteConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/UI/ShareSDKFlatShareViewUI.framework</packagedDependency>
         <packagedDependency>ShareSDK/UI/ShareSDKShareActionSheet.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Extend/GooglePlusSDK/GoogleOpenSource.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Extend/GooglePlusSDK/GooglePlus.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Extend/Pinterest.embeddedframework/Pinterest.framework</packagedDependency>
         <packagedDependency>ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework</packagedDependency>
         <packagedDependency>ShareSDK/Extend/RenRenSDK/RennSDK.framework</packagedDependency>
     </packagedDependencies>
