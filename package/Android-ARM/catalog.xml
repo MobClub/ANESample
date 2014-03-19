@@ -15,8 +15,13 @@
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="_20e75027fc73f979493bffefcc86934f42f4484ff2e5a90a9fe5cad04f2efaf5_flash_display_Sprite" mod="1395043759062" signatureChecksum="2658630747" >
-        <def id="_20e75027fc73f979493bffefcc86934f42f4484ff2e5a90a9fe5cad04f2efaf5_flash_display_Sprite" /> 
+      <script name="cn/sharesdk/ane/ShareType" mod="1395207932953" signatureChecksum="3999558182" >
+        <def id="cn.sharesdk.ane:ShareType" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_33d8f891d9d5f0710913ba2af6e5084e5c6988c81666313e4c9d68c68a8cbe78_flash_display_Sprite" mod="1395207933218" signatureChecksum="4083251655" >
+        <def id="_33d8f891d9d5f0710913ba2af6e5084e5c6988c81666313e4c9d68c68a8cbe78_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.display:Sprite" type="i" /> 
@@ -79,7 +84,7 @@
         <dep id="flash.events:Event" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="0fef95eeb8b791f1e986a6c5f571e652ea7b4a5ff99436948e763df679c789a3"   />
+        <digest type="SHA-256" signed="false" value="74fe3b898696d4b6357c0db4a8a567246e36ae555dd44e17eda5de2ccfc1f73b"   />
       </digests>
     </library>
   </libraries>
