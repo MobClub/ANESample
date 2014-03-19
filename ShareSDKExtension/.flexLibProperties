@@ -8,6 +8,7 @@
     <classEntry path="cn.sharesdk.ane.Action"/>
     <classEntry path="cn.sharesdk.ane.events.UserInfoEvent"/>
     <classEntry path="cn.sharesdk.ane.events.ShareEvent"/>
+    <classEntry path="cn.sharesdk.ane.ShareType"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -222,8 +222,27 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		platform.setPlatformActionListener(this);
 		@SuppressWarnings("unchecked")
 		HashMap<String, Object> shareParams = (HashMap<String, Object>) params.get("shareParams");
-		platform.share(new ShareParams(shareParams));
+		ShareParams sp = new ShareParams(shareParams);
+		int shareType = sp.getShareType();
+		if (shareType > 0) {
+			sp.setShareType(iosTypeToAndroidType(shareType));
+		}
+		platform.share(sp);
 		return null;
+	}
+	
+	private int iosTypeToAndroidType(int type) {
+		switch (type) {
+			case 1: return Platform.SHARE_IMAGE;
+			case 2: return Platform.SHARE_WEBPAGE;
+			case 3: return Platform.SHARE_MUSIC;
+			case 4: return Platform.SHARE_VIDEO;
+			case 5: return Platform.SHARE_APPS;
+			case 6: 
+			case 7: return Platform.SHARE_EMOJI;
+			case 8: return Platform.SHARE_FILE;
+		}
+        return Platform.SHARE_TEXT;
 	}
 	
 	private String multishare(HashMap<String, Object> params) {
