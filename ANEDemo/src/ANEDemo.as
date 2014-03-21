@@ -8,6 +8,7 @@ package
 	import flash.events.MouseEvent;
 	
 	import cn.sharesdk.ane.PlatformID;
+	import cn.sharesdk.ane.ShareMenuArrowDirection;
 	import cn.sharesdk.ane.ShareSDKExtension;
 	
 	public class ANEDemo extends Sprite
@@ -22,7 +23,7 @@ package
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			
-			shareSDK.open("1234");
+			shareSDK.open("iosv1101");
 			shareSDK.setPlatformActionListener(onComplete, onError, onCancel);
 			
 			var qzConf:Object = new Object();
@@ -185,7 +186,7 @@ package
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
 			shareParams.description = "asdfdsafsadf";
-			shareSDK.showShareMenu(null, shareParams);
+			shareSDK.showShareMenu(null, shareParams, 320, 460, ShareMenuArrowDirection.Any);
 		}
 		
 		private function shareViewBtnClickHandler(event:MouseEvent):void
