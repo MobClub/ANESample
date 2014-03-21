@@ -224,9 +224,7 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		HashMap<String, Object> shareParams = (HashMap<String, Object>) params.get("shareParams");
 		ShareParams sp = new ShareParams(shareParams);
 		int shareType = sp.getShareType();
-		if (shareType > 0) {
-			sp.setShareType(iosTypeToAndroidType(shareType));
-		}
+		sp.setShareType(iosTypeToAndroidType(shareType));
 		platform.share(sp);
 		return null;
 	}
