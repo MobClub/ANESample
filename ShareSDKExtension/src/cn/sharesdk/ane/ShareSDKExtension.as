@@ -294,6 +294,11 @@ package cn.sharesdk.ane {
 			callJavaFunction("toast", params);
 		}
 		
+		public function screenshot():String {
+			var path:String = callJavaFunction("screenshot");
+			return path;
+		}
+		
 		public function onComplete(platform:int, action:int, res:Object):void {
 			if (onCom != null) {
 				onCom(platform, action, res);

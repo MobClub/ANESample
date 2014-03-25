@@ -1,15 +1,15 @@
 /*
- * Offical Website:http://www.ShareSDK.cn
- * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
+ * 官网地站:http://www.ShareSDK.cn
+ * 技术支持QQ: 4006852216
+ * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
  *
- * Copyright (c) 2013 ShareSDK.cn. All rights reserved.
+ * Copyright (c) 2013年 ShareSDK.cn. All rights reserved.
  */
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.getBitmapRes;
-import static cn.sharesdk.framework.utils.R.getStringRes;
+import static cn.sharesdk.framework.utils.R.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,24 +47,24 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.utils.UIHandler;
 
 /**
- * entrance of onekeyshare
+ * 快捷分享的入口
  * <p>
- * by setting different setter parameter, then call the Show method to start the shortcut to share
+ * 通过不同的setter设置参数，然后调用{@link #show(Context)}方法启动快捷分享
  */
 public class OnekeyShare extends FakeActivity implements
 		OnClickListener, PlatformActionListener, Callback {
 	private static final int MSG_TOAST = 1;
 	private static final int MSG_ACTION_CCALLBACK = 2;
 	private static final int MSG_CANCEL_NOTIFY = 3;
-	// page container
+	// 页面
 	private FrameLayout flPage;
-	// gridview of platform list
+	// 宫格列表
 	private PlatformGridView grid;
-	// cancel button
+	// 取消按钮
 	private Button btnCancel;
-	// sliding up animation
+	// 滑上来的动画
 	private Animation animShow;
-	// sliding down animation
+	// 滑下去的动画
 	private Animation animHide;
 	private boolean finishing;
 	private boolean canceled;
@@ -90,125 +90,128 @@ public class OnekeyShare extends FakeActivity implements
 		super.show(context, null);
 	}
 
-	/** icon and text to notify after sharing */
+	/** 分享时Notification的图标和文字 */
 	public void setNotification(int icon, String title) {
 		notifyIcon = icon;
 		notifyTitle = title;
 	}
 
-	/** short message address or email address */
+	/** address是接收人地址，仅在信息和邮件使用，否则可以不提供 */
 	public void setAddress(String address) {
 		reqMap.put("address", address);
 	}
 
-	/** title of share content */
+	/**
+	 * title标题，在印象笔记、邮箱、信息、微信（包括好友、朋友圈和收藏）、
+	 * 易信（包括好友、朋友圈）、人人网和QQ空间使用，否则可以不提供
+	 */
 	public void setTitle(String title) {
 		reqMap.put("title", title);
 	}
 
-	/** the url of title */
+	/** titleUrl是标题的网络链接，仅在人人网和QQ空间使用，否则可以不提供 */
 	public void setTitleUrl(String titleUrl) {
 		reqMap.put("titleUrl", titleUrl);
 	}
 
-	/** share content */
+	/** text是分享文本，所有平台都需要这个字段 */
 	public void setText(String text) {
 		reqMap.put("text", text);
 	}
 
-	/** returns share content */
+	/** 获取text字段的值 */
 	public String getText() {
 		return reqMap.containsKey("text") ? String.valueOf(reqMap.get("text")) : null;
 	}
 
-	/** local path of the image to share */
+	/** imagePath是本地的图片路径，除Linked-In外的所有平台都支持这个字段 */
 	public void setImagePath(String imagePath) {
 		if(!TextUtils.isEmpty(imagePath))
 			reqMap.put("imagePath", imagePath);
 	}
 
-	/** url of the image to share */
+	/** imageUrl是图片的网络路径，新浪微博、人人网、QQ空间和Linked-In支持此字段 */
 	public void setImageUrl(String imageUrl) {
 		if (!TextUtils.isEmpty(imageUrl))
 			reqMap.put("imageUrl", imageUrl);
 	}
 
-	/** webpage link to share in wechat and yixin etc.*/
+	/** url在微信（包括好友、朋友圈收藏）和易信（包括好友和朋友圈）中使用，否则可以不提供 */
  	public void setUrl(String url) {
 		reqMap.put("url", url);
 	}
 
- 	/** local path of the file to share in wechat */
+	/** filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供 */
 	public void setFilePath(String filePath) {
 		reqMap.put("filePath", filePath);
 	}
 
-	/** comment field of platform renren */
+	/** comment是我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供 */
 	public void setComment(String comment) {
 		reqMap.put("comment", comment);
 	}
 
-	/** app name or site name of your program */
+	/** site是分享此内容的网站名称，仅在QQ空间使用，否则可以不提供 */
 	public void setSite(String site) {
 		reqMap.put("site", site);
 	}
 
-	/** the url of the website or appname */
+	/** siteUrl是分享此内容的网站地址，仅在QQ空间使用，否则可以不提供 */
 	public void setSiteUrl(String siteUrl) {
 		reqMap.put("siteUrl", siteUrl);
 	}
 
-	/** location name */
+	/** foursquare分享时的地方名 */
 	public void setVenueName(String venueName) {
 		reqMap.put("venueName", venueName);
 	}
 
-	/** description of your sharing location */
+	/** foursquare分享时的地方描述 */
 	public void setVenueDescription(String venueDescription) {
 		reqMap.put("venueDescription", venueDescription);
 	}
 
-	/** latitude */
+	/** 分享地纬度，新浪微博、腾讯微博和foursquare支持此字段 */
 	public void setLatitude(float latitude) {
 		reqMap.put("latitude", latitude);
 	}
 
-	/** longitude */
+	/** 分享地经度，新浪微博、腾讯微博和foursquare支持此字段 */
 	public void setLongitude(float longitude) {
 		reqMap.put("longitude", longitude);
 	}
 
-	/** determine whether to share directly */
+	/** 是否直接分享 */
 	public void setSilent(boolean silent) {
 		this.silent = silent;
 	}
 
-	/** Setting the selected platform of EditPage when initializing */
+	/** 设置编辑页的初始化选中平台 */
 	public void setPlatform(String platform) {
 		reqMap.put("platform", platform);
 	}
 
-	/** setting custom external callback */
+	/** 设置自定义的外部回调 */
 	public void setCallback(PlatformActionListener callback) {
 		this.callback = callback;
 	}
 
-	/** returns sharing callback */
+	/** 返回操作回调 */
 	public PlatformActionListener getCallback() {
 		return callback;
 	}
 
-	/** setting the share content customizing callback for sharing process */
+	/** 设置用于分享过程中，根据不同平台自定义分享内容的回调 */
 	public void setShareContentCustomizeCallback(ShareContentCustomizeCallback callback) {
 		customizeCallback = callback;
 	}
 
-	/** returns share content customizing callback */
+	/** 返回自定义分享内容的回调 */
 	public ShareContentCustomizeCallback getShareContentCustomizeCallback() {
 		return customizeCallback;
 	}
 
-	/** add a custom icon and its click event listener */
+	/** 设置自己图标和点击事件，可以重复调用添加多次 */
 	public void setCustomerLogo(Bitmap logo, String label, OnClickListener ocListener) {
 		CustomerLogo cl = new CustomerLogo();
 		cl.label = label;
@@ -217,29 +220,40 @@ public class OnekeyShare extends FakeActivity implements
 		customers.add(cl);
 	}
 
-	/** disable SSO authorizing before sharing */
+	/** 设置一个总开关，用于在分享前若需要授权，则禁用sso功能 */
  	public void disableSSOWhenAuthorize() {
 		disableSSO = true;
 	}
 
-	/** set the display mode of editpage to be the dialog mode */
+	/** 设置编辑页面的显示模式为Dialog模式 */
 	public void setDialogMode() {
 		dialogMode = true;
 		reqMap.put("dialogMode", dialogMode);
 	}
 
-	/** add a hidden platform */
+	/** 添加一个隐藏的platform */
 	public void addHiddenPlatform(String platform) {
 		hiddenPlatforms.put(platform, platform);
 	}
 
+	/** 设置一个将被截图分享的View */
+	public void setViewToShare(View viewToShare) {
+		try {
+			String path = saveViewToImage(viewToShare);
+			reqMap.put("viewToShare", path);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void onCreate() {
-		// display mode of onekeyshare is controled by the field of platform and silent,
-		// if platform is set, platform gridview won't be display, onekeyshare will jump to editpage directly
-		// if silent is true, onekeyshare will skip the editpage and shares directly
-		// the class only determines the value of platform, because after PlatformGridView is shown, all events will be passed into it
-		// when platform is set, and silent is true, onekeyshare will share the selected platform directly
-		// when platform is set, and silent is false, onekeyshare will determine whether to share by the client of the platform or not
+		// 显示方式是由platform和silent两个字段控制的
+		// 如果platform设置了，则无须显示九宫格，否则都会显示；
+		// 如果silent为true，表示不进入编辑页面，否则会进入。
+		// 本类只判断platform，因为九宫格显示以后，事件交给PlatformGridView控制
+		// 当platform和silent都为true，则直接进入分享；
+		// 当platform设置了，但是silent为false，则判断是否是“使用客户端分享”的平台，
+		// 若为“使用客户端分享”的平台，则直接分享，否则进入编辑页面
 		HashMap<String, Object> copy = new HashMap<String, Object>();
 		copy.putAll(reqMap);
 		if (copy.containsKey("platform")) {
@@ -281,18 +295,18 @@ public class OnekeyShare extends FakeActivity implements
 		initAnim();
 		activity.setContentView(flPage);
 
-		// set the data for platform gridview
+		// 设置宫格列表数据
 		grid.setData(copy, silent);
 		grid.setHiddenPlatforms(hiddenPlatforms);
 		grid.setCustomerLogos(customers);
 		grid.setParent(this);
 		btnCancel.setOnClickListener(this);
 
-		// display gridviews
+		// 显示列表
 		flPage.clearAnimation();
 		flPage.startAnimation(animShow);
 
-		// a statistics of opening the platform gridview
+		// 打开分享菜单的统计
 		ShareSDK.logDemoEvent(1, null);
 	}
 
@@ -300,7 +314,7 @@ public class OnekeyShare extends FakeActivity implements
 		flPage = new FrameLayout(getContext());
 		flPage.setOnClickListener(this);
 
-		// container of the platform gridview
+		// 宫格列表的容器，为了“下对齐”，在外部包含了一个FrameLayout
 		LinearLayout llPage = new LinearLayout(getContext()) {
 			public boolean onTouchEvent(MotionEvent event) {
 				return true;
@@ -317,14 +331,14 @@ public class OnekeyShare extends FakeActivity implements
 		llPage.setLayoutParams(lpLl);
 		flPage.addView(llPage);
 
-		// gridview
+		// 宫格列表
 		grid = new PlatformGridView(getContext());
 		LinearLayout.LayoutParams lpWg = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		grid.setLayoutParams(lpWg);
 		llPage.addView(grid);
 
-		// cancel button
+		// 取消按钮
 		btnCancel = new Button(getContext());
 		btnCancel.setTextColor(0xffffffff);
 		btnCancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
@@ -392,7 +406,7 @@ public class OnekeyShare extends FakeActivity implements
 			return;
 		}
 
-		// a statistics of cancel sharing
+		// 取消分享菜单的统计
 		if (canceled) {
 			ShareSDK.logDemoEvent(2, null);
 		}
@@ -415,7 +429,7 @@ public class OnekeyShare extends FakeActivity implements
 		flPage.startAnimation(animHide);
 	}
 
-	/** execute the loop of share */
+	/** 循环执行分享 */
 	public void share(HashMap<Platform, HashMap<String, Object>> shareData) {
 		boolean started = false;
 		for (Entry<Platform, HashMap<String, Object>> ent : shareData.entrySet()) {
@@ -548,7 +562,7 @@ public class OnekeyShare extends FakeActivity implements
 		msg.obj = t;
 		UIHandler.sendMessage(msg, this);
 
-		// a statistics of cancel sharing
+		// 分享失败的统计
 		ShareSDK.logDemoEvent(4, platform);
 	}
 
@@ -571,7 +585,7 @@ public class OnekeyShare extends FakeActivity implements
 			case MSG_ACTION_CCALLBACK: {
 				switch (msg.arg1) {
 					case 1: {
-						// success
+						// 成功
 						int resId = getStringRes(getContext(), "share_completed");
 						if (resId > 0) {
 							showNotification(2000, getContext().getString(resId));
@@ -579,7 +593,7 @@ public class OnekeyShare extends FakeActivity implements
 					}
 					break;
 					case 2: {
-						// failed
+						// 失败
 						String expName = msg.obj.getClass().getSimpleName();
 						if ("WechatClientNotExistException".equals(expName)
 								|| "WechatTimelineNotSupportedException".equals(expName)
@@ -613,7 +627,7 @@ public class OnekeyShare extends FakeActivity implements
 					}
 					break;
 					case 3: {
-						// canceled
+						// 取消
 						int resId = getStringRes(getContext(), "share_canceled");
 						if (resId > 0) {
 							showNotification(2000, getContext().getString(resId));
@@ -634,7 +648,7 @@ public class OnekeyShare extends FakeActivity implements
 		return false;
 	}
 
-	// notify the share result
+	// 在状态栏提示分享操作
 	private void showNotification(long cancelTime, String text) {
 		try {
 			Context app = getContext().getApplicationContext();

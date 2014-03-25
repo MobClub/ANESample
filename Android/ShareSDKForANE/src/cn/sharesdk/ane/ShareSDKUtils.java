@@ -1,5 +1,7 @@
 package cn.sharesdk.ane;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,8 +9,12 @@ import java.util.Map;
 import m.framework.utils.Hashon;
 import m.framework.utils.UIHandler;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Canvas;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.view.View;
 import android.widget.Toast;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
@@ -82,6 +88,8 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 						resp = showShareView(params);
 					} else if ("toast".equals(action)) {
 						resp = toast(params);
+					} else if ("screenshot".equals(action)) {
+						resp = screenshot(params);
 					}
 					return resp == null ? null : FREObject.newObject(resp);
 				}
@@ -342,6 +350,27 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 				return false;
 			}
 		});
+		return null;
+	}
+	
+	private String screenshot(HashMap<String, Object> params) {
+		View view = getActivity().getWindow().getDecorView();
+		int w = view.getWidth();
+		int h = view.getHeight();
+		Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+		view.draw(new Canvas(bm));
+		
+		try {
+			String path = cn.sharesdk.framework.utils.R.getCachePath(getActivity(), null);
+			File ss = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+			FileOutputStream fos = new FileOutputStream(ss);
+			bm.compress(CompressFormat.JPEG, 100, fos);
+			fos.flush();
+			fos.close();
+			return ss.getAbsolutePath();
+		} catch(Throwable t) {
+			t.printStackTrace();
+		}
 		return null;
 	}
 	

@@ -5,10 +5,8 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
 	import cn.sharesdk.ane.PlatformID;
 	import cn.sharesdk.ane.ShareSDKExtension;
-	import cn.sharesdk.ane.ShareType;
 	
 	public class ANEDemo extends Sprite
 	{
@@ -194,5 +192,6 @@ package
 			platforms[0] = PlatformID.TencentWeibo;
 			shareSDK.showShareView(PlatformID.SinaWeibo, shareParams);
 		}
+		
 	}
 }

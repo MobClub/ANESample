@@ -10,7 +10,7 @@ set platform-ios-x86=-platform iPhone-x86 -C ./iPhone-x86 . -platformoptions pla
 set platform-android=-platform Android-ARM -C ./Android-ARM .
 
 echo Packaging...
-del %ane%
+del %ane% > nul
 %adt% -package -target %target% -swc %swc% %platform-ios-arm% %platform-ios-x86% %platform-android%
 
 cls
