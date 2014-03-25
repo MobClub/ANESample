@@ -17,13 +17,12 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <RennSDK/RennSDK.h>
-//#import <GoogleOpenSource/GoogleOpenSource.h>
-//#import <GooglePlus/GooglePlus.h>
-//#import <Pinterest/Pinterest.h>
 #import "WXApi.h"
 #import "YXApi.h"
+#import "ShareSDKWindow.h"
 
 static UIView *_refView = nil;
+static UIView *_containerView = nil;
 
 NSString *objectToString(FREObject obj)
 {
@@ -263,9 +262,7 @@ void ShareSDKOpen (NSDictionary *params)
     //根据自己需要导入第三方SDK
     [WeiboSDK class];
     [ShareSDK importTencentWeiboClass:[WeiboApi class]];
-//    [ShareSDK importGooglePlusClass:[GPPSignIn class] shareClass:[GPPShare class]];
     [ShareSDK importQQClass:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
-//    [ShareSDK importPinterestClass:[Pinterest class]];
     [ShareSDK importRenRenClass:[RennClient class]];
     [ShareSDK importWeChatClass:[WXApi class]];
     [ShareSDK importYiXinClass:[YXApi class]];
@@ -575,6 +572,7 @@ void ShareSDKOneKeyShare (FREContext ctx, NSDictionary *params)
 
 void ShareSDKShowShareMenu (FREContext ctx, NSDictionary *params)
 {
+    @try {
         NSInteger x = 0;
         NSInteger y = 0;
         UIPopoverArrowDirection direction = UIPopoverArrowDirectionAny;
@@ -605,12 +603,21 @@ void ShareSDKShowShareMenu (FREContext ctx, NSDictionary *params)
         id<ISSContainer> container = nil;
         if ([UIDevice currentDevice].isPad)
         {
-            if (!_refView)
+            UIViewController *vc = [ShareSDK currentViewController];
+            
+            if (!_containerView)
             {
-                _refView = [[UIView alloc] initWithFrame:CGRectMake(x, y, 1, 1)];
+                _containerView = [[UIView alloc] initWithFrame:vc.view.bounds];
+                
+                _refView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+                [_containerView addSubview:_refView];
+                [_refView release];
             }
             
-            [[UIApplication sharedApplication].keyWindow addSubview:_refView];
+            _refView.frame = CGRectMake(x, y, 1, 1);
+            
+            [_containerView removeFromSuperview];
+            [vc.view addSubview:_containerView];
             
             container = [ShareSDK container];
             [container setIPadContainerWithView:_refView arrowDirect:direction];
@@ -664,13 +671,22 @@ void ShareSDKShowShareMenu (FREContext ctx, NSDictionary *params)
                                                                 (uint8_t *)[code cStringUsingEncoding:NSUTF8StringEncoding],
                                                                 (uint8_t *)[dataStr cStringUsingEncoding:NSUTF8StringEncoding]);
                                     
-                                    if (_refView)
+                                    if (_containerView)
                                     {
                                         //移除视图
-                                        [_refView removeFromSuperview];
+                                        [_containerView removeFromSuperview];
                                     }
                                     
                                 }];
+    }
+    @catch (NSException *exception) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[exception reason] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
+    
+    
 }
 
 void ShareSDKShowShareView (FREContext ctx, NSDictionary *params)
@@ -868,10 +884,10 @@ void ShareSDKContextInitializer (void*  extData, const uint8_t* ctxType, FRECont
 
 void ShareSDKContextFinalizer (FREContext ctx)
 {
-    if (_refView)
+    if (_containerView)
     {
-        [_refView release];
-        _refView = nil;
+        [_containerView release];
+        _containerView = nil;
     }
 }
 

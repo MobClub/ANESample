@@ -1,11 +1,13 @@
 package
 {
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import cn.sharesdk.ane.PlatformID;
+	import cn.sharesdk.ane.ShareMenuArrowDirection;
 	import cn.sharesdk.ane.ShareSDKExtension;
 	
 	public class ANEDemo extends Sprite
@@ -22,6 +24,11 @@ package
 			
 			shareSDK.open("iosv1101");
 			shareSDK.setPlatformActionListener(onComplete, onError, onCancel);
+			
+			var qzConf:Object = new Object();
+			qzConf["app_id"] = "100371282";
+			qzConf["app_key"] = "aed9b0303e3ed1e27bae87c33761161d";
+			shareSDK.setPlatformConfig(PlatformID.QZone, qzConf);
 		}
 		
 		private static const BUTTON_WIDTH:Number = 260;
@@ -31,6 +38,7 @@ package
 		
 		private function addedToStageHandler(event:Event):void
 		{
+			
 			var authBtn:Button = new Button();
 			authBtn.label = "授权";
 			authBtn.x = 100;
@@ -151,7 +159,7 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
-			shareSDK.shareContent(PlatformID.WeChatSession, shareParams);
+			shareSDK.shareContent(PlatformID.QZone, shareParams);
 		}
 		
 		private function oneKeyShareBtnClickHandler(event:MouseEvent):void
@@ -176,7 +184,8 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
-			shareSDK.showShareMenu(null, shareParams);
+			shareParams.description = "asdfdsafsadf";
+			shareSDK.showShareMenu(null, shareParams, 320, 460, ShareMenuArrowDirection.Any);
 		}
 		
 		private function shareViewBtnClickHandler(event:MouseEvent):void
@@ -188,6 +197,7 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
+			shareParams.description = "asdfdsafsadf";
 			var platforms:Array = new Array();
 			platforms[0] = PlatformID.TencentWeibo;
 			shareSDK.showShareView(PlatformID.SinaWeibo, shareParams);

@@ -271,7 +271,7 @@ package cn.sharesdk.ane {
 			callJavaFunction(NativeMethodName.MULTI_SHARE, params);
 		}
 		
-		public function showShareMenu(platforms:Array = null, shareParams:Object = null, x:Number = 0, y:Number = 0, direction:int = uint.MAX_VALUE):void {
+		public function showShareMenu(platforms:Array = null, shareParams:Object = null, x:Number = 0, y:Number = 0, direction:int = 0x0f):void {
 			var params:Object = new Object();
 			params.platforms = platforms;
 			params.shareParams = shareParams;
