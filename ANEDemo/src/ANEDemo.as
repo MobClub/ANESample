@@ -159,7 +159,7 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
-			shareSDK.shareContent(PlatformID.QZone, shareParams);
+			shareSDK.shareContent(PlatformID.WeChatTimeline, shareParams);
 		}
 		
 		private function oneKeyShareBtnClickHandler(event:MouseEvent):void
@@ -200,7 +200,7 @@ package
 			shareParams.description = "asdfdsafsadf";
 			var platforms:Array = new Array();
 			platforms[0] = PlatformID.TencentWeibo;
-			shareSDK.showShareView(PlatformID.SinaWeibo, shareParams);
+			shareSDK.showShareView(PlatformID.WeChatTimeline, shareParams);
 		}
 		
 	}
