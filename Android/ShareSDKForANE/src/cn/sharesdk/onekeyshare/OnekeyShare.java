@@ -9,7 +9,7 @@
 package cn.sharesdk.onekeyshare;
 
 import static cn.sharesdk.framework.utils.R.*;
-
+import static cn.sharesdk.framework.utils.BitmapHelper.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +78,7 @@ public class OnekeyShare extends FakeActivity implements
 	private boolean dialogMode;
 	private boolean disableSSO;
 	private HashMap<String, String> hiddenPlatforms;
+	private View bgView;
 
 	public OnekeyShare() {
 		reqMap = new HashMap<String, Object>();
@@ -87,6 +88,7 @@ public class OnekeyShare extends FakeActivity implements
 	}
 
 	public void show(Context context) {
+		ShareSDK.initSDK(context);
 		super.show(context, null);
 	}
 
@@ -239,11 +241,15 @@ public class OnekeyShare extends FakeActivity implements
 	/** 设置一个将被截图分享的View */
 	public void setViewToShare(View viewToShare) {
 		try {
-			String path = saveViewToImage(viewToShare);
-			reqMap.put("viewToShare", path);
+			Bitmap bm = captureView(viewToShare, viewToShare.getWidth(), viewToShare.getHeight());
+			reqMap.put("viewToShare", bm);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setEditPageBackground(View bgView) {
+		this.bgView = bgView;
 	}
 
 	public void onCreate() {
@@ -261,22 +267,24 @@ public class OnekeyShare extends FakeActivity implements
 			if (silent) {
 				HashMap<Platform, HashMap<String, Object>> shareData
 						= new HashMap<Platform, HashMap<String,Object>>();
-				shareData.put(ShareSDK.getPlatform(activity, name), copy);
+				shareData.put(ShareSDK.getPlatform(name), copy);
 				share(shareData);
-			} else if (ShareCore.isUseClientToShare(activity, name)) {
+			} else if (ShareCore.isUseClientToShare(name)) {
 				HashMap<Platform, HashMap<String, Object>> shareData
 						= new HashMap<Platform, HashMap<String,Object>>();
-				shareData.put(ShareSDK.getPlatform(activity, name), copy);
+				shareData.put(ShareSDK.getPlatform(name), copy);
 				share(shareData);
 			} else {
-				Platform pp = ShareSDK.getPlatform(activity, name);
+				Platform pp = ShareSDK.getPlatform(name);
 				if (pp instanceof CustomPlatform) {
 					HashMap<Platform, HashMap<String, Object>> shareData
 							= new HashMap<Platform, HashMap<String,Object>>();
-					shareData.put(ShareSDK.getPlatform(activity, name), copy);
+					shareData.put(ShareSDK.getPlatform(name), copy);
 					share(shareData);
 				} else {
 					EditPage page = new EditPage();
+					page.setBackGround(bgView);
+					bgView = null;
 					page.setShareData(copy);
 					page.setParent(this);
 					if (dialogMode) {
@@ -333,6 +341,7 @@ public class OnekeyShare extends FakeActivity implements
 
 		// 宫格列表
 		grid = new PlatformGridView(getContext());
+		grid.setEditPageBackground(bgView);
 		LinearLayout.LayoutParams lpWg = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		grid.setLayoutParams(lpWg);
@@ -513,13 +522,21 @@ public class OnekeyShare extends FakeActivity implements
 					shareType = Platform.SHARE_WEBPAGE;
 				}
 			} else {
-				Object imageUrl = data.get("imageUrl");
-				if (imageUrl != null && !TextUtils.isEmpty(String.valueOf(imageUrl))) {
+				Bitmap viewToShare = (Bitmap) data.get("viewToShare");
+				if (viewToShare != null && !viewToShare.isRecycled()) {
 					shareType = Platform.SHARE_IMAGE;
-					if (String.valueOf(imageUrl).endsWith(".gif")) {
-						shareType = Platform.SHARE_EMOJI;
-					} else if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
+					if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
 						shareType = Platform.SHARE_WEBPAGE;
+					}
+				} else {
+					Object imageUrl = data.get("imageUrl");
+					if (imageUrl != null && !TextUtils.isEmpty(String.valueOf(imageUrl))) {
+						shareType = Platform.SHARE_IMAGE;
+						if (String.valueOf(imageUrl).endsWith(".gif")) {
+							shareType = Platform.SHARE_EMOJI;
+						} else if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
+							shareType = Platform.SHARE_WEBPAGE;
+						}
 					}
 				}
 			}

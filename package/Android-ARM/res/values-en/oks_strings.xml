@@ -14,4 +14,5 @@
 	<string name="pull_to_refresh">Pull down to refresh</string>
 	<string name="release_to_refresh">Release to refresh</string>
 	<string name="refreshing">Refreshing…</string>
+	<string name="shake2share">Shake your phone!</string>
 </resources>

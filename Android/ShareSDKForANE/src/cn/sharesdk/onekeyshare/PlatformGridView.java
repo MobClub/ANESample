@@ -8,8 +8,7 @@
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.getBitmapRes;
-
+import static cn.sharesdk.framework.utils.R.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +62,7 @@ public class PlatformGridView extends LinearLayout implements
 	private OnekeyShare parent;
 	private ArrayList<CustomerLogo> customers;
 	private HashMap<String, String> hiddenPlatforms;
+	private View bgView;
 
 	public PlatformGridView(Context context) {
 		super(context);
@@ -86,7 +86,7 @@ public class PlatformGridView extends LinearLayout implements
 		// 为了更好的ui效果，开启子线程获取平台列表
 		new Thread(){
 			public void run() {
-				platformList = ShareSDK.getPlatformList(context);
+				platformList = ShareSDK.getPlatformList();
 				if (platformList == null) {
 					platformList = new Platform[0];
 				}
@@ -138,6 +138,8 @@ public class PlatformGridView extends LinearLayout implements
 		if (platformList != null) {
 			int cusSize = customers == null ? 0 : customers.size();
 			int platSize = platformList == null ? 0 : platformList.length;
+			int hideSize = hiddenPlatforms == null ? 0 : hiddenPlatforms.size();
+			platSize = platSize-hideSize;
 			int size = platSize + cusSize;
 			pageCount = size / PAGE_SIZE;
 			if (size % PAGE_SIZE > 0) {
@@ -207,6 +209,10 @@ public class PlatformGridView extends LinearLayout implements
 		this.customers = customers;
 	}
 
+	public void setEditPageBackground(View bgView) {
+		this.bgView = bgView;
+	}
+
 	/** 设置分享操作的回调页面 */
 	public void setParent(OnekeyShare parent) {
 		this.parent = parent;
@@ -227,7 +233,7 @@ public class PlatformGridView extends LinearLayout implements
 			reqData.put("platform", name);
 			// EditPage不支持微信平台、Google+、QQ分享、Pinterest、信息和邮件，总是执行直接分享
 			if ((plat instanceof CustomPlatform)
-					|| ShareCore.isUseClientToShare(getContext(), name)) {
+					|| ShareCore.isUseClientToShare(name)) {
 				HashMap<Platform, HashMap<String, Object>> shareData
 						= new HashMap<Platform, HashMap<String,Object>>();
 				shareData.put(plat, reqData);
@@ -237,6 +243,8 @@ public class PlatformGridView extends LinearLayout implements
 
 			// 跳转EditPage分享
 			EditPage page = new EditPage();
+			page.setBackGround(bgView);
+			bgView = null;
 			page.setShareData(reqData);
 			page.setParent(parent);
 			if ("true".equals(String.valueOf(reqData.get("dialogMode")))) {

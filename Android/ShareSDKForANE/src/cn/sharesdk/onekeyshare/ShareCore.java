@@ -8,13 +8,18 @@
 
 package cn.sharesdk.onekeyshare;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.text.TextUtils;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.framework.utils.R;
 import cn.sharesdk.framework.ShareSDK;
 
 /**
@@ -41,10 +46,21 @@ public class ShareCore {
 			return false;
 		}
 
-		String imagePath = (String) data.get("imagePath");
-		String viewToShare = (String) data.get("viewToShare");
-		if (TextUtils.isEmpty(imagePath) && !TextUtils.isEmpty(viewToShare)) {
-			data.put("imagePath", data.get("viewToShare"));
+		try {
+			String imagePath = (String) data.get("imagePath");
+			Bitmap viewToShare = (Bitmap) data.get("viewToShare");
+			if (TextUtils.isEmpty(imagePath) && viewToShare != null && !viewToShare.isRecycled()) {
+				String path = R.getCachePath(plat.getContext(), "screenshot");
+				File ss = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+				FileOutputStream fos = new FileOutputStream(ss);
+				viewToShare.compress(CompressFormat.JPEG, 100, fos);
+				fos.flush();
+				fos.close();
+				data.put("imagePath", ss.getAbsolutePath());
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return false;
 		}
 
 		ShareParams sp = new ShareParams(data);
@@ -56,7 +72,7 @@ public class ShareCore {
 	}
 
 	/** 判断指定平台是否使用客户端分享 */
-	public static boolean isUseClientToShare(Context context, String platform) {
+	public static boolean isUseClientToShare(String platform) {
 		if ("Wechat".equals(platform) || "WechatMoments".equals(platform)
 				|| "WechatFavorite".equals(platform) || "ShortMessage".equals(platform)
 				|| "Email".equals(platform) || "GooglePlus".equals(platform)
@@ -66,12 +82,12 @@ public class ShareCore {
 				|| "Mingdao".equals(platform)) {
 			return true;
 		} else if ("Evernote".equals(platform)) {
-			Platform plat = ShareSDK.getPlatform(context, platform);
+			Platform plat = ShareSDK.getPlatform(platform);
 			if ("true".equals(plat.getDevinfo("ShareByAppClient"))) {
 				return true;
 			}
 		} else if ("SinaWeibo".equals(platform)) {
-			Platform plat = ShareSDK.getPlatform(context, platform);
+			Platform plat = ShareSDK.getPlatform(platform);
 			if ("true".equals(plat.getDevinfo("ShareByAppClient"))) {
 				Intent test = new Intent(Intent.ACTION_SEND);
 				test.setPackage("com.sina.weibo");
