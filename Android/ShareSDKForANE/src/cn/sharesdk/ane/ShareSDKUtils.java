@@ -299,6 +299,8 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 				oks.setSiteUrl(String.valueOf(map.get("siteUrl")));
 			}
 			oks.setCallback(this);
+			oks.setDialogMode();
+			oks.setEditPageBackground(getActivity().getWindow().getDecorView());
 			oks.show(getActivity());
 		}
 		return null;
@@ -337,6 +339,8 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 			int platform = (Integer) params.get("platform");
 			String platformName = ShareSDK.platformIdToName(platform);
 			oks.setPlatform(platformName);
+			oks.setDialogMode();
+			oks.setEditPageBackground(getActivity().getWindow().getDecorView());
 			oks.show(getActivity());
 		}
 		return null;
