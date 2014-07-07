@@ -6,9 +6,11 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
 	import cn.sharesdk.ane.PlatformID;
 	import cn.sharesdk.ane.ShareMenuArrowDirection;
 	import cn.sharesdk.ane.ShareSDKExtension;
+	import cn.sharesdk.ane.ShareType;
 	
 	public class ANEDemo extends Sprite
 	{
@@ -159,7 +161,7 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
-			shareSDK.shareContent(PlatformID.WeChatTimeline, shareParams);
+			shareSDK.shareContent(PlatformID.SinaWeibo, shareParams);
 		}
 		
 		private function oneKeyShareBtnClickHandler(event:MouseEvent):void
@@ -172,6 +174,7 @@ package
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
+			shareParams.type = ShareType.SHARE_WEBPAGE;
 			shareSDK.oneKeyShareContent(platforms, shareParams);
 		}
 		
@@ -185,6 +188,7 @@ package
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
 			shareParams.description = "asdfdsafsadf";
+			shareParams.type = ShareType.SHARE_WEBPAGE;
 			shareSDK.showShareMenu(null, shareParams, 320, 460, ShareMenuArrowDirection.Any);
 		}
 		
