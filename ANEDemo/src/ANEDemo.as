@@ -33,7 +33,7 @@ package
 			shareSDK.setPlatformConfig(PlatformID.QZone, qzConf);
 		}
 		
-		private static const BUTTON_WIDTH:Number = 260;
+		private static const BUTTON_WIDTH:Number = 300;
 		private static const BUTTON_HEIGHT:Number = 80;
 		
 		private var shareSDK:ShareSDKExtension = new ShareSDKExtension();
@@ -105,7 +105,7 @@ package
 			shareMenuBtn.addEventListener(MouseEvent.CLICK, shareMenuBtnClickHandler);
 			
 			var shareViewBtn:Button = new Button();
-			shareViewBtn.label = "显示分享菜单";
+			shareViewBtn.label = "显示分享编辑页";
 			shareViewBtn.x = 100;
 			shareViewBtn.y = shareMenuBtn.y + shareMenuBtn.height + 20;
 			shareViewBtn.width = BUTTON_WIDTH;
@@ -183,7 +183,7 @@ package
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
 			shareParams.titleUrl = "http://sharesdk.cn";
-			shareParams.text = "好耶～好高兴啊～";
+			shareParams.text = "这不科学！";
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
@@ -204,7 +204,7 @@ package
 			shareParams.description = "asdfdsafsadf";
 			var platforms:Array = new Array();
 			platforms[0] = PlatformID.TencentWeibo;
-			shareSDK.showShareView(PlatformID.WeChatTimeline, shareParams);
+			shareSDK.showShareView(PlatformID.SinaWeibo, shareParams);
 		}
 		
 	}

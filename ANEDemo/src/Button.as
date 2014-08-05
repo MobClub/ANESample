@@ -12,7 +12,7 @@ package
 			super();
 			
 			this.graphics.beginFill(0xcccccc, 1);
-			this.graphics.drawRect(0, 0, 260, 80);
+			this.graphics.drawRect(0, 0, 300, 80);
 			this.graphics.endFill();
 			
 			_label = new TextField();
