@@ -8,7 +8,7 @@ set swc=.\ShareSDKExtension.swc
 set platform-android=-platform Android-ARM -C ./Android-ARM .
 
 echo Packaging...
-del %ane% > nul
+if exist %ane% del %ane% > nul
 %adt% -package -target %target% -swc %swc% %platform-ios-arm% %platform-ios-x86% %platform-android%
 
 cls
