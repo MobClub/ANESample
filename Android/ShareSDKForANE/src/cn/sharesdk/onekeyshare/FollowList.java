@@ -1,51 +1,57 @@
 /*
- * 官网地站:http://www.mob.com
- * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
+ * Offical Website:http://www.mob.com
+ * Support QQ: 4006852216
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
  *
- * Copyright (c) 2013年 mob.com. All rights reserved.
+ * Copyright (c) 2013 mob.com. All rights reserved.
  */
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import m.framework.ui.widget.asyncview.AsyncImageView;
-import m.framework.ui.widget.asyncview.BitmapProcessor;
-import m.framework.ui.widget.pulltorefresh.PullToRefreshListAdapter;
-import m.framework.ui.widget.pulltorefresh.PullToRefreshView;
-import cn.sharesdk.framework.FakeActivity;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.TitleLayout;
-import cn.sharesdk.framework.utils.UIHandler;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.os.Message;
 import android.os.Handler.Callback;
+import android.os.Message;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-/** 获取好友或关注列表 */
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import cn.sharesdk.framework.FakeActivity;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.TitleLayout;
+import cn.sharesdk.framework.utils.UIHandler;
+import m.framework.ui.widget.asyncview.AsyncImageView;
+import m.framework.ui.widget.asyncview.BitmapProcessor;
+import m.framework.ui.widget.pulltorefresh.PullToRefreshListAdapter;
+import m.framework.ui.widget.pulltorefresh.PullToRefreshView;
+
+import static cn.sharesdk.framework.utils.R.dipToPx;
+import static cn.sharesdk.framework.utils.R.getBitmapRes;
+import static cn.sharesdk.framework.utils.R.getStringRes;
+
+/** Request a list of friends or followings */
 public class FollowList extends FakeActivity implements OnClickListener, OnItemClickListener {
 	private TitleLayout llTitle;
 	private Platform platform;
 	private FollowAdapter adapter;
+	private int lastPosition = -1;
 
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
@@ -57,7 +63,7 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 		llPage.setOrientation(LinearLayout.VERTICAL);
 		activity.setContentView(llPage);
 
-		// 标题栏
+		// title bar
 		llTitle = new TitleLayout(getContext());
 		int resId = getBitmapRes(getContext(), "title_back");
 		if (resId > 0) {
@@ -85,7 +91,7 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 		flPage.setLayoutParams(lpFl);
 		llPage.addView(flPage);
 
-		// 关注（或朋友）列表
+		// the list of friends or followings
 		PullToRefreshView followList = new PullToRefreshView(getContext());
 		FrameLayout.LayoutParams lpLv = new FrameLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -106,7 +112,7 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 		ivShadow.setLayoutParams(lpSd);
 		flPage.addView(ivShadow);
 
-		// 请求数据
+		// request data
 		followList.performPulling(true);
 	}
 
@@ -138,6 +144,12 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 						selected.add(adapter.getItem(i).uid);
 					}
 				}
+			} else if ("FacebookMessenger".equals(name)) {
+				for (int i = 0, size = adapter.getCount(); i < size; i++) {
+					if (adapter.getItem(i).checked) {
+						selected.add(adapter.getItem(i).uid);
+					}
+				}
 			}
 
 			HashMap<String, Object> res = new HashMap<String, Object>();
@@ -149,6 +161,14 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 	}
 
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		String name = platform.getName();
+		if ("FacebookMessenger".equals(name)) {
+			if(lastPosition >= 0) {
+				Following lastFollwing = adapter.getItem(lastPosition);
+				lastFollwing.checked = false;
+			}
+			lastPosition  = position;
+		}
 		Following following = adapter.getItem(position);
 		following.checked = !following.checked;
 		adapter.notifyDataSetChanged();
@@ -156,6 +176,7 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 
 	private static class FollowAdapter extends PullToRefreshListAdapter
 			implements PlatformActionListener, Callback {
+		private static final int FOLLOW_LIST_EMPTY = 2;
 		private int curPage;
 		private ArrayList<Following> follows;
 		private HashMap<String, Following> map;
@@ -197,21 +218,25 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			FollowListItem item = null;
+			boolean simpleMode = "FacebookMessenger".equals(platform.getName());
 			if (convertView == null) {
 				LinearLayout llItem = new LinearLayout(parent.getContext());
 				item = new FollowListItem();
 				llItem.setTag(item);
 				convertView = llItem;
 
-				item.aivIcon = new AsyncImageView(getContext());
 				int dp_52 = cn.sharesdk.framework.utils.R.dipToPx(getContext(), 52);
 				int dp_10 = cn.sharesdk.framework.utils.R.dipToPx(parent.getContext(), 10);
 				int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(parent.getContext(), 5);
-				LinearLayout.LayoutParams lpIcon = new LinearLayout.LayoutParams(dp_52, dp_52);
-				lpIcon.gravity = Gravity.CENTER_VERTICAL;
-				lpIcon.setMargins(dp_10, dp_5, dp_10, dp_5);
-				item.aivIcon.setLayoutParams(lpIcon);
-				llItem.addView(item.aivIcon);
+
+				if(!simpleMode) {
+					item.aivIcon = new AsyncImageView(getContext());
+					LinearLayout.LayoutParams lpIcon = new LinearLayout.LayoutParams(dp_52, dp_52);
+					lpIcon.gravity = Gravity.CENTER_VERTICAL;
+					lpIcon.setMargins(dp_10, dp_5, dp_10, dp_5);
+					item.aivIcon.setLayoutParams(lpIcon);
+					llItem.addView(item.aivIcon);
+				}
 
 				LinearLayout llText = new LinearLayout(parent.getContext());
 				llText.setPadding(0, dp_10, dp_10, dp_10);
@@ -227,13 +252,18 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 				item.tvName.setTextColor(0xff000000);
 				item.tvName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 				item.tvName.setSingleLine();
+				if(simpleMode) {
+					item.tvName.setPadding(dp_10, 0, 0, 0);
+				}
 				llText.addView(item.tvName);
 
-				item.tvSign = new TextView(parent.getContext());
-				item.tvSign.setTextColor(0x7f000000);
-				item.tvSign.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-				item.tvSign.setSingleLine();
-				llText.addView(item.tvSign);
+				if(!simpleMode) {
+					item.tvSign = new TextView(parent.getContext());
+					item.tvSign.setTextColor(0x7f000000);
+					item.tvSign.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+					item.tvSign.setSingleLine();
+					llText.addView(item.tvSign);
+				}
 
 				item.ivCheck = new ImageView(parent.getContext());
 				item.ivCheck.setPadding(0, 0, dp_10, 0);
@@ -248,17 +278,21 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 
 			Following following = getItem(position);
 			item.tvName.setText(following.screeName);
-			item.tvSign.setText(following.description);
+			if(!simpleMode) {
+				item.tvSign.setText(following.description);
+			}
 			item.ivCheck.setImageBitmap(following.checked ? bmChd : bmUnch);
-			if (isFling()) {
-				Bitmap bm = BitmapProcessor.getBitmapFromCache(following.icon);
-				if (bm != null && !bm.isRecycled()) {
-					item.aivIcon.setImageBitmap(bm);
+			if(!simpleMode) {
+				if (isFling()) {
+					Bitmap bm = BitmapProcessor.getBitmapFromCache(following.icon);
+					if (bm != null && !bm.isRecycled()) {
+						item.aivIcon.setImageBitmap(bm);
+					} else {
+						item.aivIcon.execute(null, AsyncImageView.DEFAULT_TRANSPARENT);
+					}
 				} else {
-					item.aivIcon.execute(null, AsyncImageView.DEFAULT_TRANSPARENT);
+					item.aivIcon.execute(following.icon);
 				}
-			} else {
-				item.aivIcon.execute(following.icon);
 			}
 
 			if (position == getCount() - 1) {
@@ -307,6 +341,8 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 				msg.what = 1;
 				msg.obj = data;
 				UIHandler.sendMessage(msg, this);
+			}else{
+				UIHandler.sendEmptyMessage(FOLLOW_LIST_EMPTY, this);
 			}
 		}
 
@@ -411,12 +447,30 @@ public class FollowList extends FakeActivity implements OnClickListener, OnItemC
 					}
 				}
 			}
+			else if ("FacebookMessenger".equals(platform.getName())) {
+				@SuppressWarnings("unchecked")
+				ArrayList<HashMap<String, Object>> users
+						= (ArrayList<HashMap<String,Object>>) res.get("users");
+				for (HashMap<String, Object> user : users) {
+					String userAddr = String.valueOf(user.get("jid"));
+					if (!map.containsKey(userAddr)) {
+						Following following = new Following();
+						following.uid = userAddr;
+						following.screeName = String.valueOf(user.get("name"));
+						map.put(following.uid, following);
+						data.add(following);
+					}
+				}
+				hasNext = false;
+			}
 			return data;
 		}
 
 		public boolean handleMessage(Message msg) {
 			if (msg.what < 0) {
 				((Activity) getContext()).finish();
+			} else if(msg.what == FOLLOW_LIST_EMPTY) {
+				notifyDataSetChanged();
 			} else {
 				if (curPage <= 0) {
 					follows.clear();

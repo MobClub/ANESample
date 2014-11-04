@@ -1,19 +1,13 @@
 /*
- * 官网地站:http://www.mob.com
- * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
+ * Offical Website:http://www.mob.com
+ * Support QQ: 4006852216
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
  *
- * Copyright (c) 2013年 mob.com. All rights reserved.
+ * Copyright (c) 2013 mob.com. All rights reserved.
  */
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.*;
-import static cn.sharesdk.framework.utils.BitmapHelper.*;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -24,8 +18,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Message;
 import android.os.Handler.Callback;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -41,12 +35,17 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cn.sharesdk.framework.CustomPlatform;
 import cn.sharesdk.framework.FakeActivity;
 import cn.sharesdk.framework.Platform;
@@ -54,7 +53,20 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.TitleLayout;
 import cn.sharesdk.framework.utils.UIHandler;
 
-/** 执行图文分享的页面，此页面不支持微信平台的分享 */
+import static cn.sharesdk.framework.utils.BitmapHelper.blur;
+import static cn.sharesdk.framework.utils.BitmapHelper.captureView;
+import static cn.sharesdk.framework.utils.BitmapHelper.getBitmap;
+import static cn.sharesdk.framework.utils.R.dipToPx;
+import static cn.sharesdk.framework.utils.R.getBitmapRes;
+import static cn.sharesdk.framework.utils.R.getScreenWidth;
+import static cn.sharesdk.framework.utils.R.getStringRes;
+
+/**
+ * Photo-text Sharing will be handling in this page
+ * <p>
+ * note:
+ * wechat, yixin, qzone, etc. are shared in their clients, not in this page
+ */
 public class EditPage extends FakeActivity implements OnClickListener, TextWatcher {
 	private static final int MAX_TEXT_COUNT = 140;
 	private static final int DIM_COLOR = 0x7f323232;
@@ -63,31 +75,32 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 	private TitleLayout llTitle;
 	private LinearLayout llBody;
 	private RelativeLayout rlThumb;
-	// 文本编辑框
+	// share content editor
 	private EditText etContent;
-	// 字数计算器
+	// Words counter
 	private TextView tvCounter;
-	// 别针图片
+	// the pin
 	private ImageView ivPin;
-	// 输入区域的图片
+	// shared image container
 	private ImageView ivImage;
 	private Bitmap image;
 	private boolean shareImage;
 	private LinearLayout llPlat;
 //	private LinearLayout llAt;
-	// 平台列表
+	// platform list
 	private Platform[] platformList;
 	private View[] views;
-	// 设置显示模式为Dialog模式
+	// set to display as a dialog
 	private boolean dialogMode;
 	private View tmpBgView;
 	private Drawable background;
+	private ArrayList<String> toFriendList;
 
 	public void setShareData(HashMap<String, Object> data) {
 		reqData = data;
 	}
 
-	/** 设置显示模式为Dialog模式 */
+	/** set to display as a dialog */
 	public void setDialogMode() {
 		dialogMode = true;
 	}
@@ -120,7 +133,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		onTextChanged(etContent.getText(), 0, etContent.length(), 0);
 		showThumb();
 
-		// 获取平台列表并过滤微信等使用客户端分享的平台
+		// requests platform list and remove platforms share in their clients
 		new Thread(){
 			public void run() {
 				platformList = ShareSDK.getPlatformList();
@@ -179,7 +192,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return rlPage;
 	}
 
-	// 标题栏
+	// title bar
 	private TitleLayout getPageTitle() {
 		llTitle = new TitleLayout(getContext());
 		llTitle.setId(1);
@@ -208,7 +221,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return llTitle;
 	}
 
-	// 页面主体
+	// page body
 	private LinearLayout getPageBody() {
 		llBody = new LinearLayout(getContext());
 		llBody.setId(2);
@@ -252,7 +265,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		lpContent.weight = 1;
 		llMainBody.addView(llContent, lpContent);
 
-		// 文字输入区域
+		// share content editor
 		etContent = new EditText(getContext());
 		etContent.setGravity(Gravity.LEFT | Gravity.TOP);
 		etContent.setBackgroundDrawable(null);
@@ -270,7 +283,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return llMainBody;
 	}
 
-	// 输入区域的图片
+	// shared image container
 	private RelativeLayout getThumbView() {
 		rlThumb = new RelativeLayout(getContext());
 		rlThumb.setId(1);
@@ -311,7 +324,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		Button btn = new Button(getContext());
 		btn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// 取消分享图片
+				// remove the photo to share
 				rlThumb.setVisibility(View.GONE);
 				ivPin.setVisibility(View.GONE);
 				shareImage = false;
@@ -404,7 +417,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 			llBottom.addView(line);
 		}
 
-		// 字数统计
+		// Words counter
 		tvCounter = new TextView(getContext());
 		tvCounter.setText(String.valueOf(MAX_TEXT_COUNT));
 		tvCounter.setTextColor(0xffcfcfcf);
@@ -419,10 +432,13 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return llBottom;
 	}
 
-	// 进新浪微博、腾讯微博、Facebook和Twitter支持At功能
+	// if platform selected form platform gridview is SinaWeibo,
+	// TencentWeibo, Facebook, or Twitter, there will be a button
+	// in the left-bottom of the page, which provides At-friends function
 	private LinearLayout getAtLine(String platform) {
 		if ("SinaWeibo".equals(platform) || "TencentWeibo".equals(platform)
-				|| "Facebook".equals(platform) || "Twitter".equals(platform)) {
+				|| "Facebook".equals(platform) || "Twitter".equals(platform)
+				|| "FacebookMessenger".equals(platform)) {
 			LinearLayout llAt = new LinearLayout(getContext());
 			LinearLayout.LayoutParams lpAt = new LinearLayout.LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -447,7 +463,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 			int dp_32 = dipToPx(getContext(), 32);
 			tvAt.setLayoutParams(new LinearLayout.LayoutParams(dp_32, dp_32));
 			tvAt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-			tvAt.setText("@");
+			tvAt.setText("FacebookMessenger".equals(platform) ? "To" : "@");
 			int dp_2 = dipToPx(getContext(), 2);
 			tvAt.setPadding(0, 0, 0, dp_2);
 			tvAt.setTypeface(Typeface.DEFAULT_BOLD);
@@ -483,7 +499,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return vSep;
 	}
 
-	// 平台Logo列表
+	// platform logos
 	private LinearLayout getPlatformList() {
 		LinearLayout llToolBar = new LinearLayout(getContext());
 		LinearLayout.LayoutParams lpTb = new LinearLayout.LayoutParams(
@@ -522,7 +538,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		return llToolBar;
 	}
 
-	// 别针图片
+	// the pin
 	private ImageView getImagePin() {
 		ivPin = new ImageView(getContext());
 		int resId = getBitmapRes(activity, "pin");
@@ -575,7 +591,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 				}
 			}
 
-			// 取消分享的统计
+			// a statistics of Cancel-sharing
 			if (plat != null) {
 				ShareSDK.logDemoEvent(5, plat);
 			}
@@ -583,7 +599,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 			return;
 		}
 
-		// 取消分享的统计
+		// a statistics of Cancel-sharing
 		if (v.equals(llTitle.getBtnRight())) {
 			String text = etContent.getText().toString();
 			reqData.put("text", text);
@@ -597,6 +613,19 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 				} else {
 					reqData.put("imageUrl", null);
 					reqData.put("imagePath", null);
+				}
+			}
+			String platform = String.valueOf(reqData.get("platform"));
+			if("FacebookMessenger".equals(platform)) {
+				if(toFriendList != null && toFriendList.size() > 0) {
+					reqData.put("address", toFriendList.get(toFriendList.size()-1));
+				}
+				if(reqData.get("address") == null) {
+					int resId = getStringRes(activity, "select_a_friend");
+					if (resId > 0) {
+						Toast.makeText(getContext(), resId, Toast.LENGTH_SHORT).show();
+					}
+					return;
 				}
 			}
 
@@ -636,7 +665,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		}
 	}
 
-	/** 显示平台列表 */
+	/** display platform list */
 	public void afterPlatformListGot() {
 		String name = String.valueOf(reqData.get("platform"));
 		int size = platformList == null ? 0 : platformList.length;
@@ -673,7 +702,7 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 				views[i].setVisibility(View.INVISIBLE);
 				selection = i;
 
-				// 编辑分享内容的统计
+				// a statistics of Sharing
 				ShareSDK.logDemoEvent(3, platformList[i]);
 			}
 			views[i].setLayoutParams(lpMask);
@@ -727,6 +756,11 @@ public class EditPage extends FakeActivity implements OnClickListener, TextWatch
 		if (data != null && data.containsKey("selected")) {
 			@SuppressWarnings("unchecked")
 			ArrayList<String> selected = (ArrayList<String>) data.get("selected");
+			String platform = String.valueOf(reqData.get("platform"));
+			if("FacebookMessenger".equals(platform)) {
+				toFriendList = selected;
+				return;
+			}
 			StringBuilder sb = new StringBuilder();
 			for (String sel : selected) {
 				sb.append('@').append(sel).append(' ');

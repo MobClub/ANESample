@@ -1,9 +1,9 @@
 /*
- * 官网地站:http://www.mob.com
- * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
+ * Offical Website:http://www.mob.com
+ * Support QQ: 4006852216
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
  *
- * Copyright (c) 2013年 mob.com. All rights reserved.
+ * Copyright (c) 2013 mob.com. All rights reserved.
  */
 
 package cn.sharesdk.onekeyshare;
@@ -38,28 +38,28 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.utils.UIHandler;
 
-/** 平台宫格列表显示工具。 */
+/** platform logo list gridview */
 public class PlatformGridView extends LinearLayout implements
 		OnClickListener, Callback {
 	private static final int MIN_CLICK_INTERVAL = 1000;
 	private static final int MSG_PLATFORM_LIST_GOT = 1;
-	// 每行显示的格数
+	// grids in each line
 	private int LINE_PER_PAGE;
-	// 每页显示的行数
+	// lines in each page
 	private int COLUMN_PER_LINE;
-	// 每页显示的格数
+	// grids in each page
 	private int PAGE_SIZE;
-	// 宫格容器
+	// grids container
 	private ViewPagerClassic pager;
-	// 页面指示器
+	// indicators
 	private ImageView[] points;
 	private Bitmap grayPoint;
 	private Bitmap whitePoint;
-	// 是否不跳转EditPage而直接分享
+	// Determine whether don't jump editpage and share directly
 	private boolean silent;
-	// 平台数据
+	// platforms
 	private Platform[] platformList;
-	// 从外部传进来的分享数据（含初始化数据）
+	// data to share
 	private HashMap<String, Object> reqData;
 	private OnekeyShare parent;
 	private ArrayList<CustomerLogo> customers;
@@ -86,7 +86,7 @@ public class PlatformGridView extends LinearLayout implements
 		pager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		addView(pager);
 
-		// 为了更好的ui效果，开启子线程获取平台列表
+		// in order to have a better UI effect, opening a thread request the list of platforms
 		new Thread() {
 			public void run() {
 				platformList = ShareSDK.getPlatformList();
@@ -133,7 +133,7 @@ public class PlatformGridView extends LinearLayout implements
 		return false;
 	}
 
-	/** 初始化宫格列表ui */
+	// initializes the girdview of platforms
 	public void afterPlatformListGot() {
 		PlatformAdapter adapter = new PlatformAdapter(this);
 		pager.setAdapter(adapter);
@@ -156,7 +156,7 @@ public class PlatformGridView extends LinearLayout implements
 
 		Context context = getContext();
 		LinearLayout llPoints = new LinearLayout(context);
-		// 如果页面总数超过1，则设置页面指示器
+		// if the total number of pages exceeds 1, we set the page indicators
 		llPoints.setVisibility(pageCount > 1 ? View.VISIBLE: View.GONE);
 		LayoutParams lpLl = new LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -186,7 +186,7 @@ public class PlatformGridView extends LinearLayout implements
 		points[curPage].setImageBitmap(whitePoint);
 	}
 
-	/** 屏幕旋转后，此方法会被调用，以刷新宫格列表的布局 */
+	/** after the screen rotates, this method will be called to refresh the list of gridviews */
 	public void onConfigurationChanged() {
 		int curFirst = pager.getCurrentScreen() * PAGE_SIZE;
 		calPageSize();
@@ -207,7 +207,7 @@ public class PlatformGridView extends LinearLayout implements
 		this.hiddenPlatforms = hiddenPlatforms;
 	}
 
-	/** 设置自己图标的点击事件 */
+	/** Set the Click event of the custom icon */
 	public void setCustomerLogos(ArrayList<CustomerLogo> customers) {
 		this.customers = customers;
 	}
@@ -216,7 +216,7 @@ public class PlatformGridView extends LinearLayout implements
 		this.bgView = bgView;
 	}
 
-	/** 设置分享操作的回调页面 */
+	/** Sets the callback page sharing operations */
 	public void setParent(OnekeyShare parent) {
 		this.parent = parent;
 	}
@@ -240,7 +240,8 @@ public class PlatformGridView extends LinearLayout implements
 
 			String name = plat.getName();
 			reqData.put("platform", name);
-			// EditPage不支持微信平台、Google+、QQ分享、Pinterest、信息和邮件，总是执行直接分享
+			// EditPage don't support Wechat, google+, QQ, pinterest, short message and email,
+			// these performs always share directly
 			if ((plat instanceof CustomPlatform)
 					|| ShareCore.isUseClientToShare(name)) {
 				HashMap<Platform, HashMap<String, Object>> shareData
@@ -250,7 +251,7 @@ public class PlatformGridView extends LinearLayout implements
 				return;
 			}
 
-			// 跳转EditPage分享
+			// jump in editpage to share
 			EditPage page = new EditPage();
 			page.setBackGround(bgView);
 			bgView = null;
@@ -272,7 +273,7 @@ public class PlatformGridView extends LinearLayout implements
 		}
 	}
 
-	// 禁用页面滚动的“发光”效果
+	// Disable the flashing effect when viewpages sliding to left/right edge
 	private void disableOverScrollMode(View view) {
 		if (Build.VERSION.SDK_INT < 9) {
 			return;
@@ -287,7 +288,7 @@ public class PlatformGridView extends LinearLayout implements
 		}
 	}
 
-	/** 宫格列表数据适配器 */
+	/** gridview adapter */
 	private static class PlatformAdapter extends ViewPagerAdapter {
 		private GridView[] girds;
 		private List<Object> logos;
@@ -367,7 +368,7 @@ public class PlatformGridView extends LinearLayout implements
 			return girds[position];
 		}
 
-		/** 屏幕滑动后，此方法会被调用 */
+		/** This method will be called after sliding the gridview */
 		public void onScreenChange(int currentScreen, int lastScreen) {
 			ImageView[] points = platformGridView.points;
 			for (int i = 0; i < points.length; i++) {
@@ -379,7 +380,7 @@ public class PlatformGridView extends LinearLayout implements
 
 	}
 
-	/** 简易的宫格列表控件 */
+	/** a simple gridview */
 	private static class GridView extends LinearLayout {
 		private Object[] beans;
 		private OnClickListener callback;
