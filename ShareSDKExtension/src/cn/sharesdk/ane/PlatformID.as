@@ -3,8 +3,6 @@ package cn.sharesdk.ane {
 	public class PlatformID {
 		public static const SinaWeibo:int = 1;		//Sina Weibo
 		public static const TencentWeibo:int = 2;		//Tencent Weibo
-		public static const SohuWeibo:int = 3;		//Sohu Weibo
-		public static const NetEaseWeibo:int = 4;		//NetEase Weibo
 		public static const DouBan:int = 5;			//Dou Ban
 		public static const QZone:int = 6; 			//QZone
 		public static const Renren:int = 7;			//Ren Ren
@@ -36,7 +34,14 @@ package cn.sharesdk.ane {
 		public static const WeChatFav:int = 37;		//WeChat Favorited
 		public static const YiXinSession:int = 38; 	//YiXin Session
 		public static const YiXinTimeline:int = 39;	//YiXin Timeline
-		public static const YiXinFav:int = 40;		//YiXin Favorited
+		public static const YiXinFav:int = 40;		//YiXin Favorited 
+		public static const Mingdao:int = 41;		//Mingdao
+		public static const Line:int = 42;		//Line  
+		public static const WhatsApp:int = 43;		//WhatsApp  
+		public static const KakaoTalk:int = 44;		//KakaoTalk  
+		public static const KakaoStory:int = 45;		//KakaoStory 
+		public static const FacebookMessenger:int = 46;		//FacebookMessenger 
+		public static const Bluetooth:int = 48;		//Bluetooth 
 	}
 	
 }
