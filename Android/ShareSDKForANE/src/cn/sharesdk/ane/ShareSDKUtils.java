@@ -16,11 +16,15 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
+import cn.sharesdk.evernote.a;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.framework.m;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
@@ -90,6 +94,12 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 						resp = toast(params);
 					} else if ("screenshot".equals(action)) {
 						resp = screenshot(params);
+					} else if ("getFriendList".equals(action)){
+						resp = getFriendList(params);
+					} else if ("followFriend".equals(action)) {
+						resp = followFriend(params);
+					} else if ("getAuthInfo".equals(action)) {
+						resp = getAuthInfo(params);
 					}
 					return resp == null ? null : FREObject.newObject(resp);
 				}
@@ -162,19 +172,31 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 	}
 	
 	// ============================ Java Actions ============================
-
+	/**
+	 * Initialize the shareSDK
+	 * @param params
+	 * @return
+	 */
 	private String initSDK(HashMap<String, Object> params) {
 		String appkey = (String) params.get("appkey");
 		boolean enableStatistics = !"false".equals(params.get("enableStatistics"));
 		ShareSDK.initSDK(getActivity(), appkey, enableStatistics);
 		return null;
 	}
-	
+	/**
+	 * Stop the shareSDK
+	 * @param params
+	 * @return
+	 */
 	private String stopSDK(HashMap<String, Object> params) {
 		ShareSDK.stopSDK(getActivity());
 		return null;
 	}
-	
+	/**
+	 * Code configuration platform of information
+	 * @param params
+	 * @return
+	 */
 	private String setPlatformConfig(HashMap<String, Object> params) {
 		try {
 			int platformId = (Integer) params.get("platform");
@@ -187,7 +209,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		}
 		return null;
 	}
-	
+	/**
+	 * To obtain authorization
+	 * @param params
+	 * @return
+	 */
 	private String authorize(HashMap<String, Object> params) {
 		int platformId = (Integer) params.get("platform");
 		String platformName = ShareSDK.platformIdToName(platformId);
@@ -196,15 +222,23 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		platform.authorize();
 		return null;
 	}
-	
+	/**
+	 * Remove Authorization
+	 * @param params
+	 * @return
+	 */
 	private String removeAuthorization(HashMap<String, Object> params) {
 		int platformId = (Integer) params.get("platform");
 		String platformName = ShareSDK.platformIdToName(platformId);
 		Platform platform = ShareSDK.getPlatform(getActivity(), platformName);
-		platform.removeAccount();
+		platform.removeAccount(true);
 		return null;
 	}
-	
+	/**
+	 * To judge whether a platform with authorization
+	 * @param params
+	 * @return
+	 */
 	private String isVAlid(HashMap<String, Object> params) {
 		int platformId = (Integer) params.get("platform");
 		String platformName = ShareSDK.platformIdToName(platformId);
@@ -213,7 +247,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		map.put("isValid", platform.isValid());
 		return hashon.fromHashMap(map);
 	}
-	
+	/**
+	 * To obtain authorization and access to information users
+	 * @param params
+	 * @return
+	 */
 	private String getUserInfo(HashMap<String, Object> params) {
 		int platformId = (Integer) params.get("platform");
 		String platformName = ShareSDK.platformIdToName(platformId);
@@ -222,7 +260,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		platform.showUser(null);
 		return null;
 	}
-	
+	/**
+	 * Specify a platform for sharing, don't use onekeyshare module
+	 * @param params
+	 * @return
+	 */
 	private String share(HashMap<String, Object> params) {
 		int platformId = (Integer) params.get("platform");
 		String platformName = ShareSDK.platformIdToName(platformId);
@@ -236,7 +278,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		platform.share(sp);
 		return null;
 	}
-	
+	/**
+	 * IOS sharing type into Android share type
+	 * @param type
+	 * @return
+	 */
 	private int iosTypeToAndroidType(int type) {
 		switch (type) {
 			case 1: return Platform.SHARE_IMAGE;
@@ -265,7 +311,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		}
 		return null;
 	}
-	
+	/**
+	 * User onekeyShare module to share.
+	 * @param params
+	 * @return
+	 */
 	private String onekeyShare(HashMap<String, Object> params) {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Object> map = (HashMap<String, Object>) params.get("shareParams");
@@ -298,6 +348,13 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 			if (map.containsKey("siteUrl")) {
 				oks.setSiteUrl(String.valueOf(map.get("siteUrl")));
 			}
+			if(map.containsKey("shareTheme")){
+				if(((String) map.get("shareTheme")).equals("skyblue")){
+					oks.setTheme(OnekeyShareTheme.SKYBLUE);
+				} else {
+					oks.setTheme(OnekeyShareTheme.CLASSIC);
+				}
+			}
 			oks.disableSSOWhenAuthorize();
 			oks.setCallback(this);
 			oks.setDialogMode();
@@ -306,7 +363,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		}
 		return null;
 	}
-	
+	/**
+	 * User onekeyShare module to share.Specify a platform for sharing, don't show scratchable latex interface
+	 * @param params
+	 * @return
+	 */
 	private String showShareView(HashMap<String, Object> params) {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Object> map = (HashMap<String, Object>) params.get("shareParams");
@@ -338,7 +399,7 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 			}
 			if (map.containsKey("shareType")) {
 				oks.setSiteUrl(String.valueOf(map.get("shareType")));
-			}
+			}			
 			oks.setCallback(this);
 			int platform = (Integer) params.get("platform");
 			String platformName = ShareSDK.platformIdToName(platform);
@@ -350,7 +411,11 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		}
 		return null;
 	}
-	
+	/**
+	 * Show a toast
+	 * @param params
+	 * @return
+	 */
 	private String toast(HashMap<String, Object> params) {
 		final String message = (String) params.get("message");
 		UIHandler.sendEmptyMessage(1, new Callback() {
@@ -381,6 +446,55 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 			t.printStackTrace();
 		}
 		return null;
+	}
+	/**
+	 * To get the friends list.Support sina weibo and tencent weibo
+	 * @param params
+	 * @return
+	 */
+	private String getFriendList(HashMap<String, Object> params){
+		int platformId = (Integer) params.get("platform");
+		String platformName = ShareSDK.platformIdToName(platformId);
+		Platform platform = ShareSDK.getPlatform(getActivity(), platformName);
+		platform.setPlatformActionListener(this);
+		platform.listFriend((Integer) params.get("count"), (Integer) params.get("page"), (String) params.get("account"));
+		return null;		
+	}
+	/**
+	 * Pay attention to friends.Support sina weibo and tencent weibo
+	 * @param params
+	 * @return
+	 */
+	private String followFriend(HashMap<String, Object> params){
+		int platformId = (Integer) params.get("platform");
+		String platformName = ShareSDK.platformIdToName(platformId);
+		Platform platform = ShareSDK.getPlatform(getActivity(), platformName);
+		platform.setPlatformActionListener(this);
+		platform.followFriend((String) params.get("account"));
+		return null;
+		
+	}
+	/**
+	 * Obtain authorization information
+	 * @param params
+	 * @return
+	 */
+	private String getAuthInfo(HashMap<String, Object> params){
+		int platformId = (Integer) params.get("platform");
+		String platformName = ShareSDK.platformIdToName(platformId);
+		Platform platform = ShareSDK.getPlatform(getActivity(), platformName);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(platform.isValid()){
+			PlatformDb db = platform.getDb();		
+			map.put("token", db.getToken());
+			map.put("expiresIn", db.getExpiresIn());
+			map.put("tokenSecret", db.getTokenSecret());
+			map.put("userGender", db.getUserGender());
+			map.put("userIcon", db.getUserIcon());
+			map.put("userId", db.getUserId());
+			map.put("userName", db.getUserName());
+		}						
+		return hashon.fromHashMap(map);		
 	}
 	
 }

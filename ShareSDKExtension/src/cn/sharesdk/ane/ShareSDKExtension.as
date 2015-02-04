@@ -248,7 +248,7 @@ package cn.sharesdk.ane {
 				return false;
 			}
 			var res:Object = JSON.parse(json);
-			return res.isValid;
+			return res.isValid;			
 		}
 		
 		public function getUserInfo(platform:int):void {
@@ -298,6 +298,33 @@ package cn.sharesdk.ane {
 			var path:String = callJavaFunction("screenshot");
 			return path;
 		}
+		
+		public function getFriendList(platform:int,page:int,count:int,account:String):void {
+			var params:Object = new Object();
+			params.platform = platform;
+			params.page=page;
+			params.count=count;
+			params.account=account;
+			callJavaFunction(NativeMethodName.GET_FRIEND_LIST, params);
+		}
+		
+		public function followFriend(platform:int,account:String):void {
+			var params:Object = new Object(); 
+			params.platform = platform;
+			params.account = account;
+			callJavaFunction(NativeMethodName.FOLLOW_FRIEND, params);
+		}
+		
+		public function getAuthInfo(platform:int):Object {
+			var params:Object = new Object(); 
+			params.platform = platform;
+			var json:String=callJavaFunction(NativeMethodName.GET_AUTH_INFO, params);
+			if (json == null) {
+				return false;
+			}
+			var res:Object = JSON.parse(json);
+			return res;
+		}	
 		
 		public function onComplete(platform:int, action:int, res:Object):void {
 			if (onCom != null) {

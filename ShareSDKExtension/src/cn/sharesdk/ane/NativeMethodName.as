@@ -56,6 +56,21 @@ package cn.sharesdk.ane {
 		 * 显示分享视图 
 		 */		
 		public static const SHOW_SHARE_VIEW:String = "showShareView";
+		
+		/**
+		 * 获取好友列表
+		 */
+		public static const GET_FRIEND_LIST:String = "getFriendList";
+		
+		/**
+		 * 关注好友
+		 */
+		public static const FOLLOW_FRIEND:String = "followFriend";
+		
+		/**
+		 * 获取授权资料
+		 */
+		public static const GET_AUTH_INFO:String = "getAuthInfo";
 	}
 	
 }

@@ -352,13 +352,8 @@
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
-    <extensions>
+    
+<extensions>
         <extensionID>cn.sharesdk.ane.ShareSDKExtension</extensionID>
-    
-        
-        
-        
-        
-    
     </extensions>
 </application>

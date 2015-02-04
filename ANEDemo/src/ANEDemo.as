@@ -112,6 +112,53 @@ package
 			shareViewBtn.height = BUTTON_HEIGHT;
 			this.addChild(shareViewBtn);
 			shareViewBtn.addEventListener(MouseEvent.CLICK, shareViewBtnClickHandler);
+			
+			var getFriendListbtn:Button = new Button();
+			getFriendListbtn.label = "获取好友列表";
+			getFriendListbtn.x = 100;
+			getFriendListbtn.y = shareViewBtn.y + shareViewBtn.height + 20;
+			getFriendListbtn.width = BUTTON_WIDTH;
+			getFriendListbtn.height = BUTTON_HEIGHT;
+			this.addChild(getFriendListbtn);
+			getFriendListbtn.addEventListener(MouseEvent.CLICK, getFriendListBtnClickHandler);
+			
+			var followFriend:Button = new Button();
+			followFriend.label = "关注好友";
+			followFriend.x = 100;
+			followFriend.y = getFriendListbtn.y + getFriendListbtn.height + 20;
+			followFriend.width = BUTTON_WIDTH;
+			followFriend.height = BUTTON_HEIGHT;
+			this.addChild(followFriend);
+			followFriend.addEventListener(MouseEvent.CLICK, followFriendClickHandler);
+			
+			var getAuthInfo:Button = new Button();
+			getAuthInfo.label = "获取授权信息";
+			getAuthInfo.x = 100;
+			getAuthInfo.y = followFriend.y + followFriend.height + 20;
+			getAuthInfo.width = BUTTON_WIDTH;
+			getAuthInfo.height = BUTTON_HEIGHT;
+			this.addChild(getAuthInfo);
+			getAuthInfo.addEventListener(MouseEvent.CLICK, getAuthInfoClickHandler);
+		}
+		
+		protected function getAuthInfoClickHandler(event:MouseEvent):void {
+			//获取授权信息，包括token，userid等
+			var res:Object=shareSDK.getAuthInfo(PlatformID.SinaWeibo);
+			var json:String = (res == null ? "" : JSON.stringify(res));
+			var message:String = "AuthInfo=" + json;			
+			shareSDK.toast(message);
+		}
+		
+		protected function followFriendClickHandler(event:MouseEvent):void {
+			//支持新浪微博，腾讯微博
+			shareSDK.followFriend(PlatformID.SinaWeibo,"3189087725");
+			
+		}
+		
+		public function getFriendListBtnClickHandler(event:MouseEvent):void {
+			//获取关注列表，支持新浪微博，腾讯微博
+			shareSDK.getFriendList(PlatformID.SinaWeibo,0,10,null);
+			
 		}
 		
 		public function onComplete(platform:int, action:String, res:Object):void {
@@ -132,28 +179,28 @@ package
 		}
 		
 		private function authBtnClickHandler(event:MouseEvent):void
-		{
+		{	//授权
 			shareSDK.authorize(PlatformID.SinaWeibo);
 		}
 		
 		private function cancelAuthBtnClickHandler(event:MouseEvent):void
-		{
+		{	//取消授权
 			shareSDK.cancelAuthorie(PlatformID.SinaWeibo);
 		}
 		
 		private function hasAuthBtnClickHandler(event:MouseEvent):void
-		{
-			var isValid:Boolean = shareSDK.hasAuthorized(PlatformID.DouBan);
+		{	//检查是否存在授权
+			var isValid:Boolean = shareSDK.hasAuthorized(PlatformID.SinaWeibo);
 			shareSDK.toast("isValid = " + isValid);
 		}
 		
 		private function getUserInfoBtnClickHandler(event:MouseEvent):void
-		{
+		{	//授权并获取用户资料
 			shareSDK.getUserInfo(PlatformID.SinaWeibo);
 		}
 		
 		private function shareBtnClickHandler(event:MouseEvent):void
-		{
+		{	//不使用onekeyshare进行分享（没有9宫格界面，没有编辑框）
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
 			shareParams.titleUrl = "http://sharesdk.cn";
@@ -165,7 +212,7 @@ package
 		}
 		
 		private function oneKeyShareBtnClickHandler(event:MouseEvent):void
-		{
+		{	//多平台同时分享
 			var platforms:Array = new Array(PlatformID.SinaWeibo, PlatformID.TencentWeibo);
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
@@ -179,7 +226,7 @@ package
 		}
 		
 		private function shareMenuBtnClickHandler(event:MouseEvent):void
-		{
+		{	//onekeyshare进行分享（显示九宫格界面）
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
 			shareParams.titleUrl = "http://sharesdk.cn";
@@ -189,11 +236,12 @@ package
 			shareParams.siteUrl = "http://sharesdk.cn";
 			shareParams.description = "asdfdsafsadf";
 			shareParams.type = ShareType.SHARE_WEBPAGE;
+			shareParams.shareTheme="classic";//设置onekeyshare九宫格界面的风格，目前有skyblue，classic
 			shareSDK.showShareMenu(null, shareParams, 320, 460, ShareMenuArrowDirection.Any);
 		}
 		
 		private function shareViewBtnClickHandler(event:MouseEvent):void
-		{
+		{	//指定某一平台使用onekeyshare分享，跳过九宫格界面
 			var shareParams:Object = new Object();
 			shareParams.title = "ShareSDK for ANE发布";
 			shareParams.titleUrl = "http://sharesdk.cn";
