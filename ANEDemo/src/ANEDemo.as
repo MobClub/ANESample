@@ -220,8 +220,9 @@ package
 			shareParams.text = "好耶～好高兴啊～";
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
+			shareParams.url = "http://www.mob.com";
 			shareParams.siteUrl = "http://sharesdk.cn";
-			shareParams.type = ShareType.SHARE_WEBPAGE;
+			shareParams.shareType = ShareType.SHARE_WEBPAGE;
 			shareSDK.oneKeyShareContent(platforms, shareParams);
 		}
 		
@@ -233,9 +234,10 @@ package
 			shareParams.text = "这不科学！";
 			shareParams.imageUrl = "http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg";
 			shareParams.site = "ShareSDK";
+			shareParams.url = "http://www.mob.com";
 			shareParams.siteUrl = "http://sharesdk.cn";
 			shareParams.description = "asdfdsafsadf";
-			shareParams.type = ShareType.SHARE_WEBPAGE;
+			shareParams.shareType = ShareType.SHARE_WEBPAGE;
 			shareParams.shareTheme="classic";//设置onekeyshare九宫格界面的风格，目前有skyblue，classic
 			shareSDK.showShareMenu(null, shareParams, 320, 460, ShareMenuArrowDirection.Any);
 		}
@@ -250,8 +252,6 @@ package
 			shareParams.site = "ShareSDK";
 			shareParams.siteUrl = "http://sharesdk.cn";
 			shareParams.description = "asdfdsafsadf";
-			var platforms:Array = new Array();
-			platforms[0] = PlatformID.TencentWeibo;
 			shareSDK.showShareView(PlatformID.SinaWeibo, shareParams);
 		}
 		
