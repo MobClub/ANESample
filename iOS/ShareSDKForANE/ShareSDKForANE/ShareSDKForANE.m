@@ -12,13 +12,11 @@
 #import <ShareSDK/ShareSDK+Utils.h>
 #import <AGCommon/UIDevice+Common.h>
 
-#import "WeiboSDK.h"
-#import "WeiboApi.h"
+//#import "WeiboSDK.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
-#import <RennSDK/RennSDK.h>
+
 #import "WXApi.h"
-#import "YXApi.h"
 #import "ShareSDKWindow.h"
 
 static UIView *_refView = nil;
@@ -260,12 +258,12 @@ void ShareSDKOpen (NSDictionary *params)
     }
     
     //根据自己需要导入第三方SDK
-    [WeiboSDK class];
-    [ShareSDK importTencentWeiboClass:[WeiboApi class]];
+//    [WeiboSDK class];
+   
     [ShareSDK importQQClass:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
-    [ShareSDK importRenRenClass:[RennClient class]];
+//    [ShareSDK importRenRenClass:[RennClient class]];
     [ShareSDK importWeChatClass:[WXApi class]];
-    [ShareSDK importYiXinClass:[YXApi class]];
+   
 }
 
 void ShareSDKSetPlatformConfig (NSDictionary *params)
@@ -351,17 +349,15 @@ FREObject ShareSDKHasAuthroized (NSDictionary *params)
     {
         platType = (ShareType)[[params objectForKey:@"platform"] integerValue];
     }
-    
     BOOL retValue = [ShareSDK hasAuthorizedWithType:platType];
     FREObject retObj = NULL;
     if (FRENewObjectFromBool(retValue, &retObj) == FRE_OK)
     {
         return retObj;
     }
-    else
-    {
+    
         return NULL;
-    }
+   
 }
 
 void ShareSDKCancelAuthorize (NSDictionary *params)
@@ -779,6 +775,29 @@ void ShareSDKHandleOpenURL (NSDictionary *params)
     }
 }
 
+FREObject ShareSDKCheckClient (NSDictionary *params)
+{
+    ShareType platType = ShareTypeAny;
+    
+    if ([[params objectForKey:@"platform"] isKindOfClass:[NSNumber class]])
+    {
+        platType = (ShareType)[[params objectForKey:@"platform"] integerValue];
+    }
+    BOOL value = [[ShareSDK getClientWithType:platType] isClientInstalled];
+    
+    FREObject retObj = NULL;
+    if (FRENewObjectFromBool(value, &retObj) == FRE_OK)
+    {
+        return retObj;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+
+
 FREObject ShareSDKUnsupportMethod (FREContext ctx, void* functionData, uint32_t argc, FREObject  argv[])
 {
     return NULL;
@@ -843,6 +862,10 @@ FREObject ShareSDKCallMethod (FREContext ctx, void* functionData, uint32_t argc,
             else if ([action isEqualToString:@"handleOpenURL"])
             {
                 ShareSDKHandleOpenURL ([paramDict objectForKey:@"params"]);
+            }
+            else if ([action isEqualToString:@"checkClient"])
+            {
+                return ShareSDKCheckClient([paramDict objectForKey:@"params"]);
             }
         }
     }

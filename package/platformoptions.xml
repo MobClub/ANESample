@@ -1,4 +1,4 @@
-<platform xmlns="http://ns.adobe.com/air/extension/3.5"> 
+<platform xmlns="http://ns.adobe.com/air/extension/17.0">
     <description >ShareSDK Extension</description>
     <copyright>ShareSDK 2014 (optional)</copyright>
     <sdkVersion>7.0</sdkVersion>
@@ -15,11 +15,13 @@
         <option>-lstdc++</option>
         <option>-lsqlite3</option>
         <option>-framework Security</option>
+        <option>-framework ImageIO</option>
+        <option>-framework Social</option>
+        <option>-framework Accounts</option>
     </linkerOptions> 
     <packagedDependencies>
         <packagedDependency>ShareSDK/Core/AGCommon.framework</packagedDependency>
         <packagedDependency>ShareSDK/Core/ShareSDKCoreService.framework</packagedDependency>
-        <packagedDependency>ShareSDK/ShareSDK.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/SinaWeiboConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/CopyConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/DouBanConnection.framework</packagedDependency>

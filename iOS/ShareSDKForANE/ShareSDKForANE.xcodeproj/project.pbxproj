@@ -8,39 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		417D342F18D1C81B0043C52D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D342E18D1C81B0043C52D /* Foundation.framework */; };
-		417D343418D1C81B0043C52D /* ShareSDKForANE.m in CopyFiles */ = {isa = PBXBuildFile; fileRef = 417D343318D1C81B0043C52D /* ShareSDKForANE.m */; };
-		417D343D18D1C81B0043C52D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D343C18D1C81B0043C52D /* XCTest.framework */; };
-		417D343E18D1C81B0043C52D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D342E18D1C81B0043C52D /* Foundation.framework */; };
-		417D344018D1C81B0043C52D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D343F18D1C81B0043C52D /* UIKit.framework */; };
-		417D344318D1C81B0043C52D /* libShareSDKForANE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D342B18D1C81B0043C52D /* libShareSDKForANE.a */; };
-		417D344918D1C81B0043C52D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 417D344718D1C81B0043C52D /* InfoPlist.strings */; };
-		417D344B18D1C81B0043C52D /* ShareSDKForANETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 417D344A18D1C81B0043C52D /* ShareSDKForANETests.m */; };
-		417D346318D1C8580043C52D /* libSinaWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D345518D1C8580043C52D /* libSinaWeiboSDK.a */; };
-		417D346418D1C8580043C52D /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D345918D1C8580043C52D /* libTCWeiboSDK.a */; };
+		417D343418D1C81B0043C52D /* ShareSDKForANE.m in Copy Files */ = {isa = PBXBuildFile; fileRef = 417D343318D1C81B0043C52D /* ShareSDKForANE.m */; };
 		417D346518D1C8580043C52D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D345C18D1C8580043C52D /* libWeChatSDK.a */; };
-		417D346618D1C8580043C52D /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 417D346018D1C8580043C52D /* libYixinSDK.a */; };
 		417D346818D1CA890043C52D /* ShareSDKForANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 417D343318D1C81B0043C52D /* ShareSDKForANE.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		417D344118D1C81B0043C52D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 417D342318D1C81B0043C52D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 417D342A18D1C81B0043C52D;
-			remoteInfo = ShareSDKForANE;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		417D342918D1C81B0043C52D /* CopyFiles */ = {
+		417D342918D1C81B0043C52D /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				417D343418D1C81B0043C52D /* ShareSDKForANE.m in CopyFiles */,
+				417D343418D1C81B0043C52D /* ShareSDKForANE.m in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -59,23 +41,14 @@
 		417D342E18D1C81B0043C52D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		417D343218D1C81B0043C52D /* ShareSDKForANE-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareSDKForANE-Prefix.pch"; sourceTree = "<group>"; };
 		417D343318D1C81B0043C52D /* ShareSDKForANE.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareSDKForANE.m; sourceTree = "<group>"; };
-		417D343B18D1C81B0043C52D /* ShareSDKForANETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareSDKForANETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		417D343C18D1C81B0043C52D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		417D343F18D1C81B0043C52D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		417D344618D1C81B0043C52D /* ShareSDKForANETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShareSDKForANETests-Info.plist"; sourceTree = "<group>"; };
 		417D344818D1C81B0043C52D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		417D344A18D1C81B0043C52D /* ShareSDKForANETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareSDKForANETests.m; sourceTree = "<group>"; };
-		417D345518D1C8580043C52D /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSinaWeiboSDK.a; sourceTree = "<group>"; };
-		417D345618D1C8580043C52D /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
-		417D345718D1C8580043C52D /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		417D345918D1C8580043C52D /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
-		417D345A18D1C8580043C52D /* WeiboApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApi.h; sourceTree = "<group>"; };
 		417D345C18D1C8580043C52D /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		417D345D18D1C8580043C52D /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		417D345E18D1C8580043C52D /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		417D346018D1C8580043C52D /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
-		417D346118D1C8580043C52D /* YXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApi.h; sourceTree = "<group>"; };
-		417D346218D1C8580043C52D /* YXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApiObject.h; sourceTree = "<group>"; };
 		417D346718D1C8A60043C52D /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,22 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				417D346418D1C8580043C52D /* libTCWeiboSDK.a in Frameworks */,
-				417D346318D1C8580043C52D /* libSinaWeiboSDK.a in Frameworks */,
 				417D346518D1C8580043C52D /* libWeChatSDK.a in Frameworks */,
 				417D342F18D1C81B0043C52D /* Foundation.framework in Frameworks */,
-				417D346618D1C8580043C52D /* libYixinSDK.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		417D343818D1C81B0043C52D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				417D343D18D1C81B0043C52D /* XCTest.framework in Frameworks */,
-				417D344318D1C81B0043C52D /* libShareSDKForANE.a in Frameworks */,
-				417D344018D1C81B0043C52D /* UIKit.framework in Frameworks */,
-				417D343E18D1C81B0043C52D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,10 +68,7 @@
 		417D342218D1C81B0043C52D = {
 			isa = PBXGroup;
 			children = (
-				417D345418D1C8580043C52D /* SinaWeiboSDK */,
-				417D345818D1C8580043C52D /* TencentWeiboSDK */,
 				417D345B18D1C8580043C52D /* WeChatSDK */,
-				417D345F18D1C8580043C52D /* YiXinSDK */,
 				417D343018D1C81B0043C52D /* ShareSDKForANE */,
 				417D344418D1C81B0043C52D /* ShareSDKForANETests */,
 				417D342D18D1C81B0043C52D /* Frameworks */,
@@ -124,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				417D342B18D1C81B0043C52D /* libShareSDKForANE.a */,
-				417D343B18D1C81B0043C52D /* ShareSDKForANETests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,27 +139,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		417D345418D1C8580043C52D /* SinaWeiboSDK */ = {
-			isa = PBXGroup;
-			children = (
-				417D345518D1C8580043C52D /* libSinaWeiboSDK.a */,
-				417D345618D1C8580043C52D /* WeiboSDK.bundle */,
-				417D345718D1C8580043C52D /* WeiboSDK.h */,
-			);
-			name = SinaWeiboSDK;
-			path = ShareSDK/Extend/SinaWeiboSDK;
-			sourceTree = "<group>";
-		};
-		417D345818D1C8580043C52D /* TencentWeiboSDK */ = {
-			isa = PBXGroup;
-			children = (
-				417D345918D1C8580043C52D /* libTCWeiboSDK.a */,
-				417D345A18D1C8580043C52D /* WeiboApi.h */,
-			);
-			name = TencentWeiboSDK;
-			path = ShareSDK/Extend/TencentWeiboSDK;
-			sourceTree = "<group>";
-		};
 		417D345B18D1C8580043C52D /* WeChatSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,17 +150,6 @@
 			path = ShareSDK/Extend/WeChatSDK;
 			sourceTree = "<group>";
 		};
-		417D345F18D1C8580043C52D /* YiXinSDK */ = {
-			isa = PBXGroup;
-			children = (
-				417D346018D1C8580043C52D /* libYixinSDK.a */,
-				417D346118D1C8580043C52D /* YXApi.h */,
-				417D346218D1C8580043C52D /* YXApiObject.h */,
-			);
-			name = YiXinSDK;
-			path = ShareSDK/Extend/YiXinSDK;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -236,7 +159,7 @@
 			buildPhases = (
 				417D342718D1C81B0043C52D /* Sources */,
 				417D342818D1C81B0043C52D /* Frameworks */,
-				417D342918D1C81B0043C52D /* CopyFiles */,
+				417D342918D1C81B0043C52D /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -247,24 +170,6 @@
 			productReference = 417D342B18D1C81B0043C52D /* libShareSDKForANE.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		417D343A18D1C81B0043C52D /* ShareSDKForANETests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 417D345118D1C81B0043C52D /* Build configuration list for PBXNativeTarget "ShareSDKForANETests" */;
-			buildPhases = (
-				417D343718D1C81B0043C52D /* Sources */,
-				417D343818D1C81B0043C52D /* Frameworks */,
-				417D343918D1C81B0043C52D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				417D344218D1C81B0043C52D /* PBXTargetDependency */,
-			);
-			name = ShareSDKForANETests;
-			productName = ShareSDKForANETests;
-			productReference = 417D343B18D1C81B0043C52D /* ShareSDKForANETests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -273,11 +178,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "掌淘科技";
-				TargetAttributes = {
-					417D343A18D1C81B0043C52D = {
-						TestTargetID = 4104859418D9662C006FCAF8;
-					};
-				};
 			};
 			buildConfigurationList = 417D342618D1C81B0043C52D /* Build configuration list for PBXProject "ShareSDKForANE" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -294,21 +194,9 @@
 			projectRoot = "";
 			targets = (
 				417D342A18D1C81B0043C52D /* ShareSDKForANE */,
-				417D343A18D1C81B0043C52D /* ShareSDKForANETests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		417D343918D1C81B0043C52D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				417D344918D1C81B0043C52D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		417D342718D1C81B0043C52D /* Sources */ = {
@@ -319,23 +207,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		417D343718D1C81B0043C52D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				417D344B18D1C81B0043C52D /* ShareSDKForANETests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		417D344218D1C81B0043C52D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 417D342A18D1C81B0043C52D /* ShareSDKForANE */;
-			targetProxy = 417D344118D1C81B0043C52D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		417D344718D1C81B0043C52D /* InfoPlist.strings */ = {
@@ -353,6 +225,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+					armv64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -390,6 +267,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+					armv64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -420,6 +302,11 @@
 		417D344F18D1C81B0043C52D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+					arm64,
+				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/ShareSDKForANE.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -437,11 +324,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/YiXinSDK",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -452,6 +339,11 @@
 		417D345018D1C81B0043C52D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+					arm64,
+				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/ShareSDKForANE.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -469,7 +361,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/YiXinSDK",
@@ -478,46 +369,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		417D345218D1C81B0043C52D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TestShareSDKForANE.app/TestShareSDKForANE";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ShareSDKForANE/ShareSDKForANE-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "ShareSDKForANETests/ShareSDKForANETests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		417D345318D1C81B0043C52D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TestShareSDKForANE.app/TestShareSDKForANE";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ShareSDKForANE/ShareSDKForANE-Prefix.pch";
-				INFOPLIST_FILE = "ShareSDKForANETests/ShareSDKForANETests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -538,15 +389,6 @@
 			buildConfigurations = (
 				417D344F18D1C81B0043C52D /* Debug */,
 				417D345018D1C81B0043C52D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		417D345118D1C81B0043C52D /* Build configuration list for PBXNativeTarget "ShareSDKForANETests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				417D345218D1C81B0043C52D /* Debug */,
-				417D345318D1C81B0043C52D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

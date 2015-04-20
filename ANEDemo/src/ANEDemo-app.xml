@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/4.0">
+<application xmlns="http://ns.adobe.com/air/application/17.0">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
@@ -353,6 +353,8 @@
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
     
+
+
 <extensions>
         <extensionID>cn.sharesdk.ane.ShareSDKExtension</extensionID>
     </extensions>

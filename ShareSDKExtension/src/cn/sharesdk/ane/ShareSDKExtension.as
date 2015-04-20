@@ -36,13 +36,13 @@ package cn.sharesdk.ane {
 			}	
 		}
 		
-		private function callJavaFunction(action:String, params:Object = null):String {
+		private function callJavaFunction(action:String, params:Object = null):Object {
 			var data:Object = new Object();
 			data.action = action;
 			data.params = params;
 			var json:String = JSON.stringify(data);
-			trace("params = ", json);
-			return context.call("ShareSDKUtils", json) as String;
+			trace("callJavaFunctionMethod-params : ", json);
+			return context.call("ShareSDKUtils", json);
 		}
 		
 		private function javaCallback(e:StatusEvent):void {
@@ -232,6 +232,7 @@ package cn.sharesdk.ane {
 			var params:Object = new Object();
 			params.platform = platform;
 			callJavaFunction(NativeMethodName.AUTHORIZE, params);
+			
 		}
 		
 		public function cancelAuthorie(platform:int):void {
@@ -243,14 +244,32 @@ package cn.sharesdk.ane {
 		public function hasAuthorized(platform:int):Boolean {
 			var params:Object = new Object();
 			params.platform = platform;
-			var json:String = callJavaFunction(NativeMethodName.IS_VALID, params);
-			if (json == null) {
+			var obj:Object = callJavaFunction(NativeMethodName.IS_VALID, params);	
+			trace("this is hasAuthorized-json :",obj);				
+			if (obj == null){
 				return false;
 			}
-			var res:Object = JSON.parse(json);
-			return res.isValid;			
-		}
+			else 
+			{
+				return obj;
+			}
+}
 		
+		public function checkClient(platform:int):Boolean {
+			var params:Object = new Object();
+			params.platform = platform;
+			var obj:Object = callJavaFunction(NativeMethodName.CHECK_CLIENT, params);	
+			trace("this is checkClient :",obj);				
+			if (obj == null){
+				return false;
+			}
+			else 
+			{
+				return obj;
+			}
+			
+			
+		}
 		public function getUserInfo(platform:int):void {
 			var params:Object = new Object();
 			params.platform = platform;
@@ -293,38 +312,11 @@ package cn.sharesdk.ane {
 			params.message = message;
 			callJavaFunction("toast", params);
 		}
-		
+		//path 由string改为 Object
 		public function screenshot():String {
-			var path:String = callJavaFunction("screenshot");
-			return path;
+			var path:Object = callJavaFunction("screenshot");
+			return path.path;
 		}
-		
-		public function getFriendList(platform:int,page:int,count:int,account:String):void {
-			var params:Object = new Object();
-			params.platform = platform;
-			params.page=page;
-			params.count=count;
-			params.account=account;
-			callJavaFunction(NativeMethodName.GET_FRIEND_LIST, params);
-		}
-		
-		public function followFriend(platform:int,account:String):void {
-			var params:Object = new Object(); 
-			params.platform = platform;
-			params.account = account;
-			callJavaFunction(NativeMethodName.FOLLOW_FRIEND, params);
-		}
-		
-		public function getAuthInfo(platform:int):Object {
-			var params:Object = new Object(); 
-			params.platform = platform;
-			var json:String=callJavaFunction(NativeMethodName.GET_AUTH_INFO, params);
-			if (json == null) {
-				return false;
-			}
-			var res:Object = JSON.parse(json);
-			return res;
-		}	
 		
 		public function onComplete(platform:int, action:int, res:Object):void {
 			if (onCom != null) {

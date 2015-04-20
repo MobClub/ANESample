@@ -10,31 +10,31 @@
 	<string>ShareSDKForANE</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>421A0998-11CD-40AB-A8C9-67233A3803C4</key>
+		<key>00A4BCAA8934B2643503EECCB592BF0CBB211ADC</key>
 		<string>https://github.com/ShareSDKPlatform/ANESample.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOS/ShareSDKForANE/ShareSDKForANE.xcodeproj/project.xcworkspace</string>
+	<string>iOS/ShareSDKForANE/ShareSDKForANE.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>421A0998-11CD-40AB-A8C9-67233A3803C4</key>
+		<key>00A4BCAA8934B2643503EECCB592BF0CBB211ADC</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ShareSDKPlatform/ANESample.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>421A0998-11CD-40AB-A8C9-67233A3803C4</string>
+	<string>00A4BCAA8934B2643503EECCB592BF0CBB211ADC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>421A0998-11CD-40AB-A8C9-67233A3803C4</string>
+			<string>00A4BCAA8934B2643503EECCB592BF0CBB211ADC</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ANESample_git</string>
+			<string>ANESample</string>
 		</dict>
 	</array>
 </dict>
