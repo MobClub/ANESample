@@ -22,37 +22,13 @@
     <packagedDependencies>
         <packagedDependency>ShareSDK/Core/AGCommon.framework</packagedDependency>
         <packagedDependency>ShareSDK/Core/ShareSDKCoreService.framework</packagedDependency>
+        <packagedDependency>ShareSDK/ShareSDK.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/SinaWeiboConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/CopyConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/DouBanConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/DropboxConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/EverNoteConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/FacebookConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/FlickrConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/InstagramConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/InstapaperConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/KaiXinConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/LinkedInConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/MailConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/PocketConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/PrintConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/QQConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/QZoneConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/RenRenConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/SMSConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/SohuConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/SohuWeiboConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/T163WeiboConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/TencentWeiboConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/TumblrConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/TwitterConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/VKontakteConnection.framework</packagedDependency>
+        <packagedDependency>ShareSDK/Connection/QQConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/Connection/WeChatConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/YiXinConnection.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Connection/YouDaoNoteConnection.framework</packagedDependency>
         <packagedDependency>ShareSDK/UI/ShareSDKFlatShareViewUI.framework</packagedDependency>
         <packagedDependency>ShareSDK/UI/ShareSDKShareActionSheet.framework</packagedDependency>
         <packagedDependency>ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework</packagedDependency>
-        <packagedDependency>ShareSDK/Extend/RenRenSDK/RennSDK.framework</packagedDependency>
     </packagedDependencies>
 </platform>

@@ -105,6 +105,7 @@ id<ISSContent> convertPublicContent (NSDictionary *contentDict)
     NSString *title = nil;
     NSString *url = nil;
     NSString *desc = nil;
+    NSString *gifPath = nil;
     SSPublishContentMediaType type = SSPublishContentMediaTypeText;
     
     if (contentDict)
@@ -121,6 +122,10 @@ id<ISSContent> convertPublicContent (NSDictionary *contentDict)
             if ([ShareSDK isMatchWithString:imagePathStr regex:@"\\w://.*"])
             {
                 image = [ShareSDK imageWithUrl:imagePathStr];
+            }
+            else if ([ShareSDK isMatchWithString:imagePathStr regex:@".gif"]){
+                gifPath = imagePathStr;
+                image = [ShareSDK imageWithPath:imagePathStr];
             }
             else
             {
@@ -205,6 +210,20 @@ id<ISSContent> convertPublicContent (NSDictionary *contentDict)
         if ([musicUrl isKindOfClass:[NSString class]])
         {
             musicUrlStr = musicUrl;
+        }
+        
+        //增加微信Gif
+        if (gifPath) {
+            
+            [contentObj addWeixinSessionUnitWithType:INHERIT_VALUE
+                                             content:INHERIT_VALUE
+                                               title:INHERIT_VALUE
+                                                 url:INHERIT_VALUE
+                                               image:image
+                                        musicFileUrl:INHERIT_VALUE
+                                             extInfo:INHERIT_VALUE
+                                            fileData:INHERIT_VALUE
+                                        emoticonData:[NSData dataWithContentsOfFile:gifPath]];
         }
         
         if (extInfoStr || musicUrlStr)
