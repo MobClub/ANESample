@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import m.framework.utils.Hashon;
-import m.framework.utils.UIHandler;
-
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Canvas;
@@ -16,13 +13,11 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
-import cn.sharesdk.evernote.a;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.framework.m;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
@@ -30,13 +25,14 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
+import com.mob.tools.utils.Hashon;
+import com.mob.tools.utils.UIHandler;
 
 public class ShareSDKUtils extends FREContext implements FREExtension, FREFunction, PlatformActionListener {
 	private Hashon hashon;
 
 	public ShareSDKUtils() {
 		super();
-		UIHandler.prepare();
 		hashon = new Hashon();
 	}
 	
@@ -435,7 +431,7 @@ public class ShareSDKUtils extends FREContext implements FREExtension, FREFuncti
 		view.draw(new Canvas(bm));
 		
 		try {
-			String path = cn.sharesdk.framework.utils.R.getCachePath(getActivity(), null);
+			String path = com.mob.tools.utils.R.getCachePath(getActivity(), null);
 			File ss = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
 			FileOutputStream fos = new FileOutputStream(ss);
 			bm.compress(CompressFormat.JPEG, 100, fos);
