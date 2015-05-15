@@ -278,7 +278,7 @@
 			    	<activity
 			    		android:windowSoftInputMode="stateHidden|adjustResize"
 			    		android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			            android:name="cn.sharesdk.framework.ShareSDKUIShell" >
+			            android:name="com.mob.tools.MobUIShell" >
 			            <intent-filter>
 			                <data android:scheme="db-7janx53ilz11gbs" />
 			                <action android:name="android.intent.action.VIEW" />
