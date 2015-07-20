@@ -493,6 +493,9 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 		msg.arg2 = action;
 		msg.obj = platform;
 		UIHandler.sendMessage(msg, this);
+
+		// a statistics of cancel sharing
+		ShareSDK.logDemoEvent(5, platform);
 	}
 
 	public boolean handleMessage(Message msg) {

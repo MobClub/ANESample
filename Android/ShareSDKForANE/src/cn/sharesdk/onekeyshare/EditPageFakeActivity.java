@@ -239,12 +239,8 @@ public class EditPageFakeActivity extends FakeActivity {
 					return;
 				}
 				editRes.put(platform, param);
-				// a statistics of Sharing
-				ShareSDK.logDemoEvent(3, platform);
 				continue;
 			}
-			// a statistics of Sharing
-			ShareSDK.logDemoEvent(3, platform);
 			editRes.put(platform, shareParamMap);
 		}
 

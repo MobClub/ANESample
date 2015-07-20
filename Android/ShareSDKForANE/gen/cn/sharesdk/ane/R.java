@@ -189,9 +189,23 @@ public final class R {
         public static final int ssdk_oks_ptr_ptr=0x7f0200a9;
         public static final int ssdk_oks_shake_to_share_back=0x7f0200aa;
         public static final int ssdk_oks_yaoyiyao=0x7f0200ab;
-        public static final int ssdk_title_div=0x7f0200ac;
-        public static final int title_back=0x7f0200ad;
-        public static final int title_shadow=0x7f0200ae;
+        public static final int ssdk_recomm_back=0x7f0200ac;
+        public static final int ssdk_recomm_def_ad_image=0x7f0200ad;
+        public static final int ssdk_recomm_def_app_logo=0x7f0200ae;
+        public static final int ssdk_recomm_def_avatar=0x7f0200af;
+        public static final int ssdk_recomm_def_plat_logo=0x7f0200b0;
+        public static final int ssdk_recomm_download_app=0x7f0200b1;
+        public static final int ssdk_recomm_list_item_back=0x7f0200b2;
+        public static final int ssdk_recomm_list_item_back_bottom=0x7f0200b3;
+        public static final int ssdk_recomm_list_item_back_top=0x7f0200b4;
+        public static final int ssdk_recomm_list_item_mask=0x7f0200b5;
+        public static final int ssdk_recomm_plats_less=0x7f0200b6;
+        public static final int ssdk_recomm_plats_more=0x7f0200b7;
+        public static final int ssdk_recomm_result_back=0x7f0200b8;
+        public static final int ssdk_recomm_title_back=0x7f0200b9;
+        public static final int ssdk_title_div=0x7f0200ba;
+        public static final int title_back=0x7f0200bb;
+        public static final int title_shadow=0x7f0200bc;
     }
     public static final class id {
         public static final int actionbarLayout=0x7f070000;
