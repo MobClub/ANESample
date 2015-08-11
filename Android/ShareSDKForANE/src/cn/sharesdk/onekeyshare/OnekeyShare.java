@@ -314,15 +314,25 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 			plat.SSOSetting(disableSSO);
 			String name = plat.getName();
 
-//			boolean isGooglePlus = "GooglePlus".equals(name);
-//			if (isGooglePlus && !plat.isValid()) {
-//				Message msg = new Message();
-//				msg.what = MSG_TOAST;
-//				int resId = getStringRes(context, "google_plus_client_inavailable");
-//				msg.obj = context.getString(resId);
-//				UIHandler.sendMessage(msg, this);
-//				continue;
-//			}
+			boolean isGooglePlus = "GooglePlus".equals(name);
+			if (isGooglePlus && !plat.isClientValid()) {
+				Message msg = new Message();
+				msg.what = MSG_TOAST;
+				int resId = getStringRes(context, "google_plus_client_inavailable");
+				msg.obj = context.getString(resId);
+				UIHandler.sendMessage(msg, this);
+				continue;
+			}
+
+			boolean isAlipay = "Alipay".equals(name);
+			if (isAlipay && !plat.isClientValid()) {
+				Message msg = new Message();
+				msg.what = MSG_TOAST;
+				int resId = getStringRes(context, "alipay_client_inavailable");
+				msg.obj = context.getString(resId);
+				UIHandler.sendMessage(msg, this);
+				continue;
+			}
 
 			boolean isKakaoTalk = "KakaoTalk".equals(name);
 			if (isKakaoTalk && !plat.isClientValid()) {
