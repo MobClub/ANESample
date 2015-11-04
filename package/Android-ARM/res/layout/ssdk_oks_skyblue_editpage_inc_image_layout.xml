@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:scaleType="centerInside"
-        android:background="@drawable/skyblue_editpage_image_bg"
+        android:background="@drawable/ssdk_oks_skyblue_editpage_image_bg"
         android:maxHeight="56dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="7dp"
@@ -22,5 +22,5 @@
         android:layout_marginLeft="-17dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="-3dp"
-        android:src="@drawable/skyblue_editpage_image_remove"/>
+        android:src="@drawable/ssdk_oks_skyblue_editpage_image_remove"/>
 </RelativeLayout>

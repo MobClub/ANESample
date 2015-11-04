@@ -10,13 +10,13 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="center"
-        android:src="@drawable/skyblue_actionbar_back_btn"
+        android:src="@drawable/ssdk_oks_skyblue_actionbar_back_btn"
         android:layout_marginLeft="5dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/share"
+        android:text="@string/ssdk_oks_share"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -27,7 +27,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="center"
-        android:src="@drawable/skyblue_actionbar_ok_btn"
+        android:src="@drawable/ssdk_oks_skyblue_actionbar_ok_btn"
         android:layout_marginRight="5dp"
         android:layout_alignParentRight="true"
         />

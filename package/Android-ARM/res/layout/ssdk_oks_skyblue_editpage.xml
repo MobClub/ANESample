@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/actionbarLayout"
-        layout="@layout/skyblue_share_actionbar"/>
+        layout="@layout/ssdk_oks_skyblue_share_actionbar"/>
 
     <RelativeLayout
         android:id="@+id/mainRelLayout"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/actionbarLayout"
         android:layout_margin="14dp"
-        android:background="@drawable/skyblue_editpage_bg"
+        android:background="@drawable/ssdk_oks_skyblue_editpage_bg"
         android:padding="10dp">
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="20dp"
                 android:paddingLeft="10dp"
                 android:scaleType="center"
-                android:src="@drawable/skyblue_editpage_close"/>
+                android:src="@drawable/ssdk_oks_skyblue_editpage_close"/>
             </LinearLayout>
 
         <View
@@ -45,7 +45,7 @@
             android:layout_height="1dp"
             android:layout_below="@id/titleLayout"
             android:layout_marginTop="5dp"
-            android:background="@drawable/skyblue_editpage_divider"/>
+            android:background="@drawable/ssdk_oks_skyblue_editpage_divider"/>
 
         <EditText
             android:id="@+id/textEditText"

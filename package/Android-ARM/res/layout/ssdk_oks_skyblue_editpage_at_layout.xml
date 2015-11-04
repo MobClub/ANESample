@@ -8,7 +8,7 @@
         android:id="@+id/atTextView"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:background="@drawable/btn_back_nor"
+        android:background="@drawable/ssdk_oks_btn_back_nor"
         android:gravity="center_horizontal"
         android:layout_marginTop="2dp"
         android:textColor="#333333"
@@ -22,7 +22,7 @@
         android:layout_below="@id/textEditText"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@id/atTextView"
-        android:text="@string/list_friends"
+        android:text="@string/ssdk_oks_list_friends"
         android:textColor="#333333"
         android:textSize="14sp"/>
 </RelativeLayout>

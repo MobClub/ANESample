@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/skyblue_platform_list_selector">
+                android:background="@drawable/ssdk_oks_skyblue_platform_list_selector">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,6 +38,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/skyblue_platform_checked"/>
+            android:src="@drawable/ssdk_oks_skyblue_platform_checked"/>
     </RelativeLayout>
 </RelativeLayout>
